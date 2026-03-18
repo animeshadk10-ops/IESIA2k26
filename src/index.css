@@ -1,0 +1,155 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+@theme {
+  --color-deep-teal: #1B7B79;
+  --color-light-aqua: #6BC4C8;
+  --color-pale-cream: #FCE4A8;
+  --color-bright-yellow: #FFD43A;
+  --color-mustard-gold: #E4AC3D;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-deep-teal);
+    color: var(--color-pale-cream);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background-color: var(--color-mustard-gold);
+    color: var(--color-deep-teal);
+  }
+}
+
+@layer components {
+  .glass-panel {
+    background: rgba(252, 228, 168, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(252, 228, 168, 0.2);
+  }
+
+  .glass-panel:hover {
+    border-color: rgba(252, 228, 168, 0.4);
+  }
+
+  .section-padding {
+    padding-left: clamp(1.5rem, 5vw, 6rem);
+    padding-right: clamp(1.5rem, 5vw, 6rem);
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
+  .btn-primary {
+    background: var(--color-mustard-gold);
+    color: var(--color-deep-teal);
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 0.625rem 1.5rem;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary:hover {
+    background: var(--color-bright-yellow);
+    box-shadow: 0 0 30px rgba(255, 212, 58, 0.4);
+    transform: translateY(-1px);
+  }
+}
+
+@layer utilities {
+  .animate-pulse-slow {
+    animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Infinite marquee animations */
+  .animate-marquee-left {
+    animation: marquee-left var(--marquee-speed, 40s) linear infinite;
+  }
+  .animate-marquee-right {
+    animation: marquee-right var(--marquee-speed, 40s) linear infinite;
+  }
+
+  @keyframes marquee-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes marquee-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+
+  /* Spine current surge */
+  .animate-spine-surge {
+    animation: spine-surge 4s ease-in-out infinite;
+  }
+  @keyframes spine-surge {
+    0% { top: -200px; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+
+  /* Aurora drift animations */
+  .animate-aurora-drift {
+    animation: aurora-drift 20s ease-in-out infinite;
+  }
+  .animate-aurora-drift-reverse {
+    animation: aurora-drift-reverse 24s ease-in-out infinite;
+  }
+  @keyframes aurora-drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -20px) scale(1.05); }
+    66% { transform: translate(-20px, 15px) scale(0.95); }
+  }
+  @keyframes aurora-drift-reverse {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-25px, 20px) scale(1.03); }
+    66% { transform: translate(15px, -25px) scale(0.97); }
+  }
+
+  /* Very slow spin for wireframe globe */
+  .animate-spin-very-slow {
+    animation: spin-very-slow 60s linear infinite;
+  }
+  @keyframes spin-very-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+}
