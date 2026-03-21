@@ -2,24 +2,31 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 const sponsorsList = [
-  { name: 'Springer', role: 'Publisher - Scopus' },
-  { name: 'CI²S Labs, Argentina', role: 'Technical Co-Sponsor' },
-  { name: '91.9 Friends FM', role: 'Media Partner' },
-  { name: 'UEM Group', role: 'Organizer' },
-  { name: 'SMART Society', role: 'Co-Sponsor' },
-  { name: 'IEM', role: 'Host Institute' },
+  { name: 'Springer', role: 'Publisher - Scopus', logo: '/Logos/springerlogo (2).png' },
+  { name: 'CI²S Labs, Argentina', role: 'Technical Co-Sponsor', logo: '/Logos/co-sponsor.png' },
+  { name: '91.9 Friends FM', role: 'Media Partner', logo: '/Logos/91.9.png' },
+  { name: 'UEM Group', role: 'Organizer', logo: '/Logos/UEM-IEM.jpeg' },
+  { name: 'SMART Society', role: 'Co-Sponsor', logo: '/Logos/smartlogo.png' },
+  { name: 'IEM', role: 'Host Institute', logo: '/Logos/UEM-IEM.jpeg' },
 ];
 
-function SponsorCard({ name, role }: { name: string, role: string }) {
-  const initial = name.substring(0, 1).toUpperCase();
+function SponsorCard({ name, role, logo }: { name: string, role: string, logo: string }) {
   return (
-    <div className="bg-white/5 backdrop-blur-lg border border-white/10 px-6 md:px-8 py-3 md:py-4 rounded-full flex items-center gap-4 shrink-0 cursor-pointer group/sponsor hover:scale-110 hover:bg-white/10 hover:border-[#E4AC3D] hover:shadow-[0_0_30px_rgba(228,172,61,0.3)] transition-all duration-500">
-      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#6BC4C8]/20 flex items-center justify-center text-white font-black text-lg md:text-xl shrink-0 group-hover/sponsor:bg-[#E4AC3D]/20 transition-colors duration-500 shadow-inner">
-        {initial}
+    <div className="bg-white/10 backdrop-blur-md border border-white/20 pl-3 pr-8 md:pr-10 py-3 rounded-full flex items-center gap-4 shrink-0 transition-all duration-300 hover:scale-105 hover:bg-white/15">
+      
+      {/* Dynamic Logo Rendering */}
+      {/* Pure white background with mix-blend-multiply ensures any JPEG white walls disappear perfectly into the circle */}
+      <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white flex items-center justify-center shrink-0 overflow-hidden p-2 shadow-sm">
+        <img 
+          src={encodeURI(logo)} 
+          alt={name} 
+          className="w-full h-full object-contain mix-blend-multiply" 
+        />
       </div>
+
       <div className="flex flex-col">
-        <span className="text-white font-bold text-base md:text-lg leading-tight group-hover/sponsor:text-[#FCE4A8] transition-colors duration-300 tracking-wide">{name}</span>
-        <span className="text-[#6BC4C8] text-xs md:text-sm uppercase tracking-widest font-bold mt-0.5">{role}</span>
+        <span className="text-white font-bold text-sm md:text-base leading-tight tracking-wide">{name}</span>
+        <span className="text-white/60 text-[10px] md:text-xs uppercase tracking-widest font-semibold mt-0.5">{role}</span>
       </div>
     </div>
   );
@@ -36,7 +43,7 @@ function MarqueeTrack({ items, direction = 'left', speed = 35 }: { items: typeof
         style={{ '--marquee-speed': `${speed}s` } as React.CSSProperties}
       >
         {loopItems.map((sponsor, i) => (
-          <SponsorCard key={`${direction}-${sponsor.name}-${i}`} name={sponsor.name} role={sponsor.role} />
+          <SponsorCard key={`${direction}-${sponsor.name}-${i}`} name={sponsor.name} role={sponsor.role} logo={sponsor.logo} />
         ))}
       </div>
     </div>

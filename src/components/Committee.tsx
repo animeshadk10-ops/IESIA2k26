@@ -2,86 +2,200 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /* ═══════════════════════════════════════════════════════════════
-   MOCK DATA
+   DATA MAPPING (EQUALIZED HIERARCHY)
    ═══════════════════════════════════════════════════════════════ */
-const programData = [
-  { name: 'Prof. Banani Chakrabarti', role: 'Chief Patron' },
-  { name: 'Prof. Dr. Satyajit Chakrabarti', role: 'Patron' },
-  { name: 'Prof. Rajat Subhra Pal', role: 'General Chair' },
-  { name: 'Prof. Dr. Subhajit Kar', role: 'General Chair' }
+
+const programCommitteeData = [
+  {
+    id: 1,
+    name: "Prof. Banani Chakrabarti",
+    role: "Chief Patron",
+    desc: "President, IEM Kolkata. Guiding the future of electrical innovation through global leadership.",
+    image: "/program committe/Banani Chakrabarti.jpg"
+  },
+  {
+    id: 2,
+    name: "Prof. Dr. Satyajit Chakrabarti",
+    role: "Patron",
+    desc: "Director, IEM Kolkata. Academic leader fostering practical teaching methodology.",
+    image: "/program committe/director Prof. Dr. Satyajit Chakrabarti.jpg"
+  },
+  {
+    id: 3,
+    name: "Prof. Dr. Arun Kumar Bar",
+    role: "General Chair",
+    desc: "Principal, IEM Kolkata. Orchestrating the technical and logistical core of IESIA 2025.",
+    image: "/program committe/Prof. Dr. Arun Kumar Bar.jpg"
+  },
+  {
+    id: 4,
+    name: "Prof. Rajat Subhra Pal",
+    role: "General Chair",
+    desc: "H.O.D (EEE Dept), IEM Kolkata. Expert in intelligent systems and industrial automation.",
+    image: null // Dummy icon
+  },
+  {
+    id: 5,
+    name: "Prof. Dr. Subhajit Kar",
+    role: "General Chair",
+    desc: "H.O.D (EE Dept), IEM Kolkata. Leading researcher in smart grid technology.",
+    image: "/program committe/Prof Dr Subhajit Kar.jpg"
+  },
+  {
+    id: 6,
+    name: "Prof. Dr. Sanjoy Mondal",
+    role: "Convenor",
+    desc: "Associate Professor, IEM Kolkata.",
+    image: "/program committe/Prof. Dr. Sanjoy Mondal.jpg"
+  },
+  {
+    id: 7,
+    name: "Prof. (Dr.) Mandakinee Bandyopadhyay",
+    role: "Convenor",
+    desc: "Associate Professor, IEM Kolkata.",
+    image: "/program committe/Prof. (Dr.) Mandakinee Bandyopadhyay.jpg"
+  },
+  {
+    id: 8,
+    name: "Prof. Pratik De Sarkar",
+    role: "Co-Convenor",
+    desc: "Assistant Professor, IEM Kolkata.",
+    image: "/program committe/Pratik De Sarkar.jpg"
+  }
 ];
 
-const advisoryData = [
-  { name: 'Prof Abdus Samad', role: 'IIT Madras' },
-  { name: 'Dr. Bhim Singh', role: 'IIT Delhi' },
-  { name: 'Prof. Su Rong', role: 'NTU Singapore' },
-  { name: 'Prof. XYZ', role: 'MIT USA' },
-  { name: 'Dr. ABC', role: 'IEM Kolkata' },
-  { name: 'Prof. DEF', role: 'Stanford' }
-];
+// MOCKUP DATA GENERATOR
+const generateMockups = (roleTitle: string) => Array.from({ length: 8 }).map((_, i) => ({
+  id: `mock-${i}`,
+  name: `Dr. John Doe ${i + 1}`,
+  role: roleTitle,
+  desc: `International expert in emerging technologies and academic excellence. Serving as a key ${roleTitle.toLowerCase()} for the conference.`,
+  image: null
+}));
 
-const technicalData = [
-  { name: 'Dr. Tamal Roy', role: 'Member' },
-  { name: 'Dr. Subrata Chattopadhyay', role: 'Member' },
-  { name: 'Dr. Soumya Chatterjee', role: 'Member' },
-  { name: 'Dr. Alpha Beta', role: 'Reviewer' },
-  { name: 'Prof. Gamma Delta', role: 'Reviewer' }
-];
-
-const organizingData = [
-  { name: 'Prof. A', role: 'Convener' },
-  { name: 'Prof. B', role: 'Co-Convener' },
-  { name: 'Dr. C', role: 'Coordinator' },
-  { name: 'Dr. D', role: 'Coordinator' }
-];
+const mockAdvisory = generateMockups('Technical Advisor');
+const mockTechnical = generateMockups('Technical Member');
+const mockOrganizing = generateMockups('Organizing Coordinator');
 
 const tabs = ['Program', 'Advisory', 'Technical', 'Organizing'];
 
 /* ═══════════════════════════════════════════════════════════════
    MAIN COMPONENT
    ═══════════════════════════════════════════════════════════════ */
+
 export default function Committee() {
   const [activeTab, setActiveTab] = useState('Program');
 
-  return (
-    <section id="committee" className="relative pt-32 pb-24 min-h-screen bg-gradient-to-b from-[#6BC4C8] to-[#FCE4A8] overflow-hidden">
-      
-      {/* =========================================
-          TOP TRANSITION WAVE (Deep Teal to #6BC4C8)
-          ========================================= */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] z-0 -translate-y-1">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-[80px] md:h-[120px]" fill="#1B7B79">
-          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
-        </svg>
-      </div>
-
-      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-12 flex flex-col items-center">
+  // Unified Sub-Card Component
+  const CommitteeSubCard = ({ person }: { person: any }) => (
+    <motion.div 
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4 }}
+      className="relative group h-full"
+    >
+      <div className="relative group h-full bg-white/10 border border-white/20 rounded-[2rem] p-6 flex flex-col items-center text-center overflow-hidden transition-all duration-500 hover:-translate-y-3 hover:bg-white/20 hover:border-[#FCE4A8] hover:shadow-2xl shadow-xl shadow-[#1B7B79]/10">
         
-        {/* HEADER */}
-        <div className="text-center mb-12">
-          <h2 className="text-[#1B7B79] font-black uppercase tracking-[0.1em] text-4xl md:text-5xl lg:text-6xl drop-shadow-sm">
+        {/* Subtle hover background sweep */}
+        <div className="absolute inset-0 bg-gradient-to-t from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+        <div className="relative w-32 h-32 rounded-full border-4 border-[#FCE4A8] shadow-xl mb-6 shrink-0 group-hover:border-[#FFD43A] transition-all duration-500 p-1 bg-white/20">
+          <div className="w-full h-full rounded-full overflow-hidden bg-[#1B7B79] flex items-center justify-center">
+            {person.image ? (
+              <img src={person.image} alt={person.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+            ) : (
+              <svg className="w-12 h-12 text-white/50 group-hover:text-[#FFD43A]/80 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+              </svg>
+            )}
+          </div>
+        </div>
+        
+        <h4 className="text-white text-xl md:text-2xl font-bold tracking-wide leading-tight group-hover:text-[#FFD43A] transition-colors drop-shadow-md">
+          {person.name}
+        </h4>
+        
+        <span className="text-[#E4AC3D] text-[10px] md:text-xs font-black tracking-[0.2em] uppercase mt-3 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full shadow-sm border border-[#E4AC3D]/20">
+          {person.role}
+        </span>
+        
+        <p className="text-[#FCE4A8] text-sm mt-5 leading-relaxed font-medium">
+          {person.desc}
+        </p>
+
+      </div>
+    </motion.div>
+  );
+
+  return (
+    <section 
+      id="committee" 
+      className="relative pt-32 pb-48 min-h-screen bg-gradient-to-br from-[#1B7B79] via-[#1B7B79] to-[#6BC4C8] overflow-hidden font-sans text-white/90 selection:bg-[#E4AC3D]/40"
+    >
+      {/* =========================================
+          BACKGROUND / ENVIRONMENT: THE COLOR PLASMA
+          ========================================= */}
+      
+      {/* Orb 1: Top Left Gold */}
+      <div className="absolute -top-[20%] -left-[10%] w-[800px] h-[800px] bg-[#E4AC3D]/40 rounded-full blur-[150px] pointer-events-none mix-blend-overlay z-0" />
+      
+      {/* Orb 2: Bottom Right Yellow */}
+      <div className="absolute -bottom-[20%] -right-[10%] w-[800px] h-[800px] bg-[#FFD43A]/30 rounded-full blur-[150px] pointer-events-none mix-blend-overlay z-0" />
+      
+      {/* Orb 3: Center Aqua */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[500px] bg-[#6BC4C8]/50 rounded-full blur-[150px] pointer-events-none z-0" />
+
+      {/* =========================================
+          CONTENT WRAPPER
+          ========================================= */}
+      <div className="relative z-10 w-full flex flex-col items-center mx-auto px-6">
+        
+        {/* Holographic Department Badge */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-8 relative group"
+        >
+          <div className="absolute -inset-1 bg-gradient-to-r from-[#FCE4A8] via-[#FFD43A] to-[#FCE4A8] rounded-full blur-md opacity-40 group-hover:opacity-80 transition duration-700" />
+          <div className="relative backdrop-blur-xl bg-white/20 border border-white/40 px-6 py-2 rounded-full uppercase tracking-[0.2em] text-[10px] md:text-xs text-white font-black text-center shadow-[0_4px_20px_rgba(255,255,255,0.2)]">
+            IESIA 2025 <span className="text-[#FFD43A] mx-2">//</span> HOSTED BY DEPT. OF EE & EEE <span className="text-[#FFD43A] mx-2">|</span> IEM KOLKATA
+          </div>
+        </motion.div>
+
+        {/* Main Header */}
+        <div className="text-center mb-16 flex flex-col items-center">
+          <motion.h2 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="text-5xl md:text-7xl lg:text-[5rem] font-black uppercase tracking-[0.1em] text-white leading-none drop-shadow-[0_4px_20px_rgba(27,123,121,0.5)]"
+            style={{ textShadow: '0 4px 30px rgba(0,0,0,0.1)' }}
+          >
             The Leadership Hub
-          </h2>
+          </motion.h2>
         </div>
 
         {/* =========================================
-            THE TAB MENU 
+            1. INTERACTIVE TABS
             ========================================= */}
-        <div className="flex items-center justify-start md:justify-center w-full mb-12 px-2 max-w-full overflow-hidden">
-          <div className="flex flex-row overflow-x-auto whitespace-nowrap scrollbar-hide pb-4 md:pb-0 items-center gap-2 bg-white/20 backdrop-blur-xl rounded-2xl md:rounded-full p-3 md:p-2 border border-white/40 shadow-lg w-full md:w-auto md:justify-center snap-x lg:flex-nowrap">
+        <div className="flex items-center justify-center mb-4 w-full px-2 max-w-full z-20 relative">
+          <div className="flex bg-white/20 backdrop-blur-2xl rounded-full p-2 border border-white/30 max-w-full overflow-x-auto scrollbar-hide shrink-0 shadow-[0_8px_32px_rgba(27,123,121,0.4)]">
             {tabs.map((tab) => {
               const isActive = activeTab === tab;
               return (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`relative px-6 py-3 rounded-full text-sm md:text-base font-bold tracking-wide transition-all duration-300 outline-none shrink-0 snap-center
-                    ${isActive ? 'text-white' : 'text-[#1B7B79] hover:bg-white/30'}`}
+                  className={`relative px-6 py-3 rounded-full text-xs md:text-sm font-black tracking-widest uppercase transition-colors duration-300 outline-none shrink-0 ${
+                    isActive ? 'text-[#1B7B79]' : 'text-white hover:text-[#FCE4A8]'
+                  }`}
                 >
                   {isActive && (
                     <motion.div
-                      layoutId="committee-tab-bubble"
-                      className="absolute inset-0 bg-[#E4AC3D] rounded-full shadow-[0_5px_15px_rgba(228,172,61,0.5)]"
+                      layoutId="committeeTabsLight"
+                      className="absolute inset-0 bg-[#FCE4A8] rounded-full shadow-[0_0_20px_rgba(252,228,168,0.6)]"
                       transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                       style={{ zIndex: -1 }}
                     />
@@ -94,133 +208,79 @@ export default function Committee() {
         </div>
 
         {/* =========================================
-            THE DATA VAULT
+            2. THE "BIG CARD" (The Glass Vault)
             ========================================= */}
-        <div className="w-full bg-white/40 backdrop-blur-2xl border border-white/50 rounded-3xl p-6 md:p-10 shadow-xl min-h-[500px] relative overflow-hidden">
+        <div className="w-full max-w-7xl mx-auto mt-12 bg-white/10 backdrop-blur-3xl border-2 border-white/20 rounded-[3rem] p-8 md:p-12 shadow-[0_20px_50px_rgba(27,123,121,0.5)] relative overflow-hidden">
+          
           <AnimatePresence mode="wait">
             
             {/* TAB 1: PROGRAM COMMITTEE */}
             {activeTab === 'Program' && (
               <motion.div
                 key="Program"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
+                exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4 }}
-                className="flex flex-wrap justify-center gap-8"
+                className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8"
               >
-                {programData.map((person, i) => (
-                  <div key={i} className="flex flex-col items-center w-full sm:w-[250px] bg-white/50 rounded-2xl p-6 border border-white/60 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-2 group">
-                    <div className="w-32 h-32 rounded-full border-4 border-[#1B7B79] bg-white/80 mb-6 flex items-center justify-center overflow-hidden shadow-inner group-hover:scale-105 transition-transform duration-300">
-                      {/* Placeholder Icon */}
-                      <svg className="w-16 h-16 text-[#1B7B79]/30" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                      </svg>
-                    </div>
-                    <h3 className="text-[#1B7B79] font-bold text-lg text-center mb-2 leading-tight">
-                      {person.name}
-                    </h3>
-                    <span className="text-[#E4AC3D] font-black uppercase text-xs tracking-widest text-center">
-                      {person.role}
-                    </span>
-                  </div>
+                {programCommitteeData.map((person) => (
+                  <CommitteeSubCard key={person.id} person={person} />
                 ))}
               </motion.div>
             )}
 
-            {/* TAB 2: ADVISORY COMMITTEE */}
+            {/* TAB 2: ADVISORY COMMITTEE (MOCKUP) */}
             {activeTab === 'Advisory' && (
               <motion.div
                 key="Advisory"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.4 }}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+                transition={{ duration: 0.3 }}
+                className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8"
               >
-                {advisoryData.map((person, i) => (
-                  <div key={i} className="bg-white rounded-xl p-4 shadow-sm border border-transparent hover:border-[#6BC4C8]/50 hover:shadow-md transition-all duration-300 flex flex-col justify-center">
-                    <h4 className="text-[#1B7B79] font-semibold text-base mb-1">{person.name}</h4>
-                    <p className="text-gray-500 text-xs font-medium uppercase tracking-wider">{person.role}</p>
-                  </div>
+                {mockAdvisory.map((person) => (
+                  <CommitteeSubCard key={person.id} person={person} />
                 ))}
               </motion.div>
             )}
 
-            {/* TAB 3: TECHNICAL COMMITTEE */}
+            {/* TAB 3: TECHNICAL COMMITTEE (MOCKUP) */}
             {activeTab === 'Technical' && (
               <motion.div
                 key="Technical"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.4 }}
-                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+                transition={{ duration: 0.3 }}
+                className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8"
               >
-                {technicalData.map((person, i) => (
-                  <div key={i} className="bg-white rounded-xl p-4 shadow-sm border border-transparent hover:border-[#6BC4C8]/50 hover:shadow-md transition-all duration-300 flex flex-col justify-center">
-                    <h4 className="text-[#1B7B79] font-semibold text-sm mb-1">{person.name}</h4>
-                    {person.role && (
-                      <p className="text-gray-400 text-[10px] font-bold uppercase tracking-wider">{person.role}</p>
-                    )}
-                  </div>
+                {mockTechnical.map((person) => (
+                  <CommitteeSubCard key={person.id} person={person} />
                 ))}
               </motion.div>
             )}
 
-            {/* TAB 4: ORGANIZING COMMITTEE & DEVELOPER */}
+            {/* TAB 4: ORGANIZING COMMITTEE (MOCKUP) */}
             {activeTab === 'Organizing' && (
               <motion.div
                 key="Organizing"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4 }}
-                className="flex flex-col min-h-full"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8"
               >
-                {/* 2-Column Masonry/List for Professors */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-20 flex-grow">
-                  {organizingData.map((person, i) => (
-                    <div key={i} className="bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-white/80 shadow-sm flex items-center justify-between hover:bg-white transition-colors">
-                      <span className="text-[#1B7B79] font-bold text-sm">{person.name}</span>
-                      <span className="text-[#E4AC3D] font-black text-[10px] uppercase tracking-widest">{person.role}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* THE CLIMAX (Web Developer Badge) */}
-                <div className="w-full flex justify-center mt-auto pb-6">
-                  <div className="relative group cursor-default">
-                    {/* Glowing background */}
-                    <div className="absolute -inset-1 bg-gradient-to-r from-[#FFD43A] to-[#E4AC3D] rounded-full blur opacity-50 group-hover:opacity-100 transition duration-500"></div>
-                    
-                    <div className="relative bg-gradient-to-r from-[#FFD43A] to-[#E4AC3D] rounded-full px-10 py-5 shadow-[0_10px_30px_rgba(228,172,61,0.4)] flex flex-col items-center text-center border border-[#FFD43A]/50">
-                      <span className="text-teal-900 font-medium text-xs tracking-[0.2em] uppercase mb-1 drop-shadow-sm/50">
-                        Web Developer
-                      </span>
-                      <span className="text-teal-900 font-black text-2xl tracking-tight leading-none mb-1">
-                        Animesh Adhikari
-                      </span>
-                      <span className="text-teal-800 text-sm font-semibold opacity-80">
-                        Student, IEM Kolkata
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                {mockOrganizing.map((person) => (
+                  <CommitteeSubCard key={person.id} person={person} />
+                ))}
               </motion.div>
             )}
 
           </AnimatePresence>
         </div>
-      </div>
 
-      {/* =========================================
-          BOTTOM TRANSITION WAVE (to Deep Teal)
-          ========================================= */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-0 translate-y-[2px] rotate-180">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-[80px] md:h-[120px]" fill="#1B7B79">
-          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
-        </svg>
       </div>
     </section>
   );

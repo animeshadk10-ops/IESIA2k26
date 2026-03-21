@@ -148,17 +148,17 @@ export default function Tracks() {
       </div>
 
       {/* =========================================
-          SVG SLANTED DIVIDER TO DATES/REGISTRATION (DEEP TEAL)
+          SVG SLANTED DIVIDER TO DATES/REGISTRATION (PALE CREAM)
           ========================================= */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-30 translate-y-[2px]">
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-30 translate-y-[1px]">
         <svg 
           viewBox="0 0 1200 120" 
           preserveAspectRatio="none" 
-          className="relative block w-full h-[150px] md:h-[200px]"
-          fill="#1B7B79"
+          className="relative block w-full h-[40px] md:h-[80px]"
+          fill="#FCE4A8"
         >
-          {/* Slanted diagonal curve */}
-          <path d="M1200,0 L0,120 L1200,120 Z"></path>
+          {/* Soft sweeping organic wave */}
+          <path d="M0,0 C300,120 900,120 1200,0 L1200,120 L0,120 Z" />
         </svg>
       </div>
     </section>

@@ -1,57 +1,59 @@
-import { useState } from 'react';
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
+"use client";
+
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = ['Home', 'About', 'Tracks', 'Speakers', 'Dates', 'Committee'];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const { scrollY } = useScroll();
+  // Scroll Listener
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    setScrolled(latest > 50);
-  });
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <motion.nav
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-full max-w-5xl px-4 transition-all duration-300"
+    <nav
+      className={`fixed top-0 left-0 w-full z-[999] transition-all duration-500 ${
+        isScrolled
+          ? 'bg-[#01030D]/85 backdrop-blur-2xl border-b border-white/10 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
+          : 'bg-transparent py-6'
+      }`}
     >
-      <div 
-        className={`w-full flex items-center justify-between px-6 py-3 rounded-full transition-all duration-300 ${
-          scrolled
-            ? 'backdrop-blur-2xl bg-[#1B7B79]/85 border border-white/20 shadow-2xl shadow-[#1B7B79]/20'
-            : 'bg-transparent border-transparent'
-        }`}
-      >
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center w-full">
+        
         {/* Brand */}
-        <a href="#" className="text-[#FCE4A8] text-xl font-black tracking-widest uppercase relative z-20">
-          IESIA
+        <a href="#" className="flex items-center gap-3 flex-shrink-0 relative z-20 hover:scale-105 transition-transform group">
+          <img 
+            src="/Logos/iesialogo.png" 
+            alt="IESIA Logo" 
+            className="w-10 h-10 md:w-12 md:h-12 object-contain"
+          />
+          <span className="text-[#FFD43A] text-xl md:text-2xl font-black tracking-widest uppercase">
+            IESIA
+          </span>
         </a>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-1 lg:gap-2 relative">
+        <div className="hidden md:flex gap-8 items-center">
           {navLinks.map((link) => (
             <a
               key={link}
-              href={`#${link.toLowerCase()}`}
-              onMouseEnter={() => setHoveredLink(link)}
-              onMouseLeave={() => setHoveredLink(null)}
-              className="relative px-4 py-2 text-sm font-medium text-[#FCE4A8] transition-colors rounded-full"
+              href={`#${link === 'Home' ? 'hero' : link.toLowerCase()}`}
+              className="text-white/80 font-medium text-sm hover:text-[#FFD43A] transition-colors uppercase tracking-wider"
             >
-              {hoveredLink === link && (
-                <motion.div
-                  layoutId="navbar-hover-bubble"
-                  className="absolute inset-0 bg-[#6BC4C8]/30 rounded-full"
-                  transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                  style={{ zIndex: -1 }}
-                />
-              )}
-              <span className="relative z-10">{link}</span>
+              {link}
             </a>
           ))}
         </div>
@@ -59,25 +61,25 @@ export default function Navbar() {
         {/* CTA (Desktop) */}
         <div className="hidden md:block">
           <a
-            href="#register"
-            className="inline-block bg-[#E4AC3D] text-[#1B7B79] font-bold px-6 py-2 rounded-full hover:bg-[#FFD43A] hover:scale-105 hover:shadow-[0_0_15px_rgba(228,172,61,0.6)] transition-all duration-300"
+            href="#registration"
+            className="inline-block bg-gradient-to-r from-[#FFD43A] to-[#E4AC3D] text-[#1B7B79] px-6 py-2 rounded-full font-bold shadow-[0_0_15px_rgba(255,212,58,0.4)] hover:shadow-[0_0_25px_rgba(255,212,58,0.6)] hover:scale-105 transition-all"
           >
             Register
           </a>
         </div>
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile Menu Toggle Button */}
         <div className="md:hidden flex items-center relative z-20">
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-[#FCE4A8] p-2 focus:outline-none"
+            className="text-[#FFD43A] p-2 focus:outline-none"
             aria-label="Toggle Menu"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-8 h-8 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileMenuOpen ? (
-                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
               ) : (
-                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" />
               )}
             </svg>
           </button>
@@ -92,20 +94,20 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[999] w-screen h-screen bg-[#1B7B79] flex flex-col items-center justify-center overflow-hidden md:hidden"
+            className="fixed inset-0 z-[999] w-screen h-screen bg-[#01030D]/95 backdrop-blur-3xl flex flex-col items-center justify-center overflow-hidden md:hidden shadow-2xl"
           >
             {/* Close 'X' Button */}
             <button 
               onClick={() => setMobileMenuOpen(false)}
-              className="absolute top-6 right-6 p-2 text-[#FCE4A8] hover:text-white transition-colors cursor-pointer"
+              className="absolute top-8 right-6 p-2 text-[#FFD43A] hover:text-white transition-colors cursor-pointer"
               aria-label="Close Mobile Menu"
             >
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
 
-            {/* Staggered Links */}
+            {/* Staggered Mobile Links */}
             <motion.div 
               initial="hidden" animate="visible" exit="hidden"
               variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
@@ -114,20 +116,20 @@ export default function Navbar() {
               {navLinks.map((link) => (
                 <motion.a
                   key={link}
-                  href={`#${link.toLowerCase()}`}
+                  href={`#${link === 'Home' ? 'hero' : link.toLowerCase()}`}
                   onClick={() => setMobileMenuOpen(false)}
                   variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-                  className="text-3xl font-black tracking-wide text-[#FCE4A8] hover:text-[#FFD43A] hover:scale-110 transition-all duration-300"
+                  className="text-3xl font-black tracking-widest uppercase text-white/90 hover:text-[#FFD43A] hover:scale-110 transition-all duration-300"
                 >
                   {link}
                 </motion.a>
               ))}
               
               <motion.a
-                href="#register"
+                href="#registration"
                 onClick={() => setMobileMenuOpen(false)}
                 variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-                className="mt-8 bg-[#E4AC3D] text-[#1B7B79] px-12 py-4 rounded-full text-2xl font-bold shadow-[0_0_20px_rgba(228,172,61,0.5)] hover:scale-105 transition-all duration-300"
+                className="mt-10 bg-gradient-to-r from-[#FFD43A] to-[#E4AC3D] text-[#1B7B79] px-12 py-4 rounded-full text-2xl font-black shadow-[0_0_25px_rgba(228,172,61,0.6)] hover:scale-105 transition-all duration-300 uppercase tracking-widest"
               >
                 Register Now
               </motion.a>
@@ -135,6 +137,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   );
 }
