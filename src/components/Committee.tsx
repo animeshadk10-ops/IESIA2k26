@@ -75,7 +75,22 @@ const generateMockups = (roleTitle: string) => Array.from({ length: 8 }).map((_,
 
 const mockAdvisory = generateMockups('Technical Advisor');
 const mockTechnical = generateMockups('Technical Member');
-const mockOrganizing = generateMockups('Organizing Coordinator');
+const organizingCommitteeData = [
+  { id: 1, name: "Prof. Dr. Subhajit Kar", role: "Organizing Committee", desc: "Associate Professor, IEM Kolkata", image: null },
+  { id: 2, name: "Prof. Somnath Hazra", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: null },
+  { id: 3, name: "Prof. Dr. Sanjoy Mondal", role: "Organizing Committee", desc: "Associate Professor, IEM Kolkata", image: null },
+  { id: 4, name: "Prof. Dr. Mandakinee Bandyopadhyay", role: "Organizing Committee", desc: "Associate Professor, IEM Kolkata", image: null },
+  { id: 5, name: "Prof. Debasish Jana", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: null },
+  { id: 6, name: "Prof. Rajat Subhra Pal", role: "Organizing Committee", desc: "H.O.D (EEE Department), IEM Kolkata", image: null },
+  { id: 7, name: "Prof. Tapas Kumar Dutta", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: null },
+  { id: 8, name: "Prof. Nirban Kumar Saha", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: null },
+  { id: 9, name: "Dr. Sourav Das", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: null },
+  { id: 10, name: "Prof. Arijita Das", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: null },
+  { id: 11, name: "Prof. Neeta Sahay", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: null },
+  { id: 12, name: "Prof. Dr. Swati Chowdhuri", role: "Organizing Committee", desc: "Professor, IEM Kolkata", image: null },
+  { id: 13, name: "Prof. Ranjita Chowdhury", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: null },
+  { id: 14, name: "Prof. Dr. Madhumita Pal", role: "Organizing Committee", desc: "Associate Professor, IEM Kolkata", image: null }
+];
 
 const tabs = ['Program', 'Advisory', 'Technical', 'Organizing'];
 
@@ -262,7 +277,7 @@ export default function Committee() {
               </motion.div>
             )}
 
-            {/* TAB 4: ORGANIZING COMMITTEE (MOCKUP) */}
+            {/* TAB 4: ORGANIZING COMMITTEE */}
             {activeTab === 'Organizing' && (
               <motion.div
                 key="Organizing"
@@ -272,7 +287,7 @@ export default function Committee() {
                 transition={{ duration: 0.3 }}
                 className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8"
               >
-                {mockOrganizing.map((person) => (
+                {organizingCommitteeData.map((person) => (
                   <CommitteeSubCard key={person.id} person={person} />
                 ))}
               </motion.div>
