@@ -46,14 +46,14 @@ export default function Hero() {
         {/* Overline */}
         <motion.div custom={0} initial="hidden" animate="visible" variants={fadeUp}>
           <h2 className="text-white/90 text-sm md:text-base font-bold tracking-[0.25em] uppercase mb-4 md:mb-6 drop-shadow-md">
-            2ND INTERNATIONAL CONFERENCE
+            3RD INTERNATIONAL CONFERENCE
           </h2>
         </motion.div>
 
         {/* Massive H1 title with GLOW */}
         <motion.div custom={1} initial="hidden" animate="visible" variants={fadeUp}>
           <h1 className="text-[5rem] sm:text-[7rem] md:text-[9rem] lg:text-[11rem] font-bold tracking-tighter text-white drop-shadow-[0_0_40px_rgba(255,255,255,0.4)] leading-[0.9] mb-4 md:mb-6">
-            IESIA 2025
+            IESIA 2026
           </h1>
         </motion.div>
 
@@ -84,13 +84,13 @@ export default function Hero() {
           {/* Chip 1 */}
           <div className="bg-[#01030D]/40 backdrop-blur-xl border border-white/20 rounded-2xl px-6 py-4 md:px-8 md:py-5 flex flex-col items-center shadow-2xl hover:bg-[#01030D]/60 transition-colors hover:-translate-y-1 w-[240px]">
             <span className="text-white/60 text-xs font-bold tracking-[0.2em] uppercase mb-1">DATE</span>
-            <span className="text-[#E4AC3D] text-lg font-black tracking-wide">10-11 April 2025</span>
+            <span className="text-[#E4AC3D] text-lg font-black tracking-wide">11-13 September 2026</span>
           </div>
           
           {/* Chip 2 */}
           <div className="bg-[#01030D]/40 backdrop-blur-xl border border-white/20 rounded-2xl px-6 py-4 md:px-8 md:py-5 flex flex-col items-center shadow-2xl hover:bg-[#01030D]/60 transition-colors hover:-translate-y-1 w-[240px]">
             <span className="text-white/60 text-xs font-bold tracking-[0.2em] uppercase mb-1">INDEXED IN</span>
-            <span className="text-[#E4AC3D] text-lg font-black tracking-wide text-center">Springer Book Series</span>
+            <span className="text-[#E4AC3D] text-lg font-black tracking-wide text-center">Scopus Indexed Book Series</span>
           </div>
 
           {/* Chip 3 */}

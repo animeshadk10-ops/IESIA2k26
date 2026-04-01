@@ -1,0 +1,47 @@
+name: Deploy Static Site
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Sync Project and Nginx
+        run: |
+          # 1. Ensure the destination directory exists
+          sudo mkdir -p /var/www/html/folder
+
+          # 2. Sync files to the specific subfolder
+          sudo rsync -av --delete --exclude='.git/' --exclude='.github/' . /var/www/html/folder/
+
+          # 3. Set Permissions
+          sudo chown -R www-data:www-data /var/www/html/folder
+          sudo chmod -R 755 /var/www/html/folder
+
+          # 4. Setup Nginx Server Block
+          # Note: The root must point to the folder containing index.html
+          sudo tee /etc/nginx/sites-available/folder <<EOF
+          server {
+              listen 80;
+              server_name _;
+
+              root /var/www/html/folder;
+              index index.html;
+
+              location / {
+                  try_files \$uri \$uri/ /index.html;
+              }
+          }
+          EOF
+
+          # 5. Link and Cleanup
+          sudo ln -sf /etc/nginx/sites-available/folder /etc/nginx/sites-enabled/
+          sudo rm -f /etc/nginx/sites-enabled/default
+
+          # 6. Apply Changes
+          sudo nginx -t && sudo systemctl reload nginx

@@ -17,16 +17,15 @@ const fadeUp = {
    DATA MAPPING
    ═══════════════════════════════════════════════════════════════ */
 const indianPricing = [
-  { role: 'Student', price: 'Rs. 4000', featured: true },
-  { role: 'Faculty / Post Doc', price: 'Rs. 4500' },
-  { role: 'Corporate', price: 'Rs. 5000', featured: true },
-  { role: 'Participation Only', price: 'Rs. 1000' },
-  { role: 'Double Submission', price: 'Rs. 8000' }
+  { role: 'Faculty/Post Doc/Scientists', price: 'Rs. 6,000/-', featured: true },
+  { role: 'Corporate', price: 'Rs. 8,000/-', featured: true },
+  { role: 'Double submission', price: 'Rs. 10,000/-' },
+  { role: 'Participation (only)', price: 'Rs. 1,000/-' }
 ];
 
 const foreignPricing = [
-  { role: 'Faculty / Post Doc', price: '$ 100', featured: false },
-  { role: 'Double Submission', price: '$ 150', featured: false }
+  { role: 'Faculty/Post Doc/Scientists', price: '$120', featured: false },
+  { role: 'Double submission', price: '$100', featured: false }
 ];
 
 /* ═══════════════════════════════════════════════════════════════

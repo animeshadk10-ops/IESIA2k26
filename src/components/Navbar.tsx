@@ -31,7 +31,7 @@ export default function Navbar() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl z-[100]"
+        className="fixed top-2 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl z-[100]"
       >
         <div
           className={`
@@ -44,16 +44,16 @@ export default function Navbar() {
         >
           {/* ── BRAND ZONE ── */}
           <a href="#hero" className="flex items-center gap-3 shrink-0 hover:scale-105 transition-transform duration-300">
-            {/* Masked Logo — overflow-hidden + scale-[1.35] crops white edges */}
-            <div className="relative h-10 w-10 rounded-full overflow-hidden border-2 border-[#6BC4C8]/50 shadow-[0_0_15px_rgba(107,196,200,0.5)] shrink-0 flex items-center justify-center bg-white">
+            {/* Logo */}
+            <div className="relative h-14 w-14 md:h-16 md:w-16 shrink-0 flex items-center justify-center">
               <img
-                src="/Logos/iesialogo.png"
-                alt="IESIA Logo"
-                className="object-cover scale-[1.35] w-full h-full"
+                src="/Logos/IESIA26_logo.png"
+                alt="IESIA 2026 Logo"
+                className="object-contain w-full h-full drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]"
               />
             </div>
             <span className="text-[#FFD43A] text-xl font-black tracking-[0.15em] drop-shadow-[0_0_10px_rgba(255,212,58,0.3)] uppercase">
-              IESIA
+              IESIA 2026
             </span>
           </a>
 

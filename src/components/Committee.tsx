@@ -64,17 +64,28 @@ const programCommitteeData = [
   }
 ];
 
-// MOCKUP DATA GENERATOR
-const generateMockups = (roleTitle: string) => Array.from({ length: 8 }).map((_, i) => ({
-  id: `mock-${i}`,
-  name: `Dr. John Doe ${i + 1}`,
-  role: roleTitle,
-  desc: `International expert in emerging technologies and academic excellence. Serving as a key ${roleTitle.toLowerCase()} for the conference.`,
-  image: null
-}));
+// MOCKUP DATA REMOVED
 
-const mockAdvisory = generateMockups('Technical Advisor');
-const mockTechnical = generateMockups('Technical Member');
+const advisoryCommitteeData = [
+  { id: 1, name: "Prof. Debasattam Pal", role: "Professor", desc: "IIT Bombay", image: "/Advisory committe/Debasattam Pal.png" },
+  { id: 2, name: "Prof. N. Lakshminarasamma", role: "Professor", desc: "IIT Madras", image: "/Advisory committe/N. Lakshminarasamma.png" },
+  { id: 3, name: "Prof. Srirama Srinivas", role: "Professor", desc: "IIT Madras", image: "/Advisory committe/Srirama Srinivas.png" },
+  { id: 4, name: "Prof. Debdutta Ray", role: "Professor", desc: "IIT Madras", image: "/Advisory committe/Debdutta Ray.png" },
+  { id: 5, name: "Prof. S.V. Kulkarni", role: "Professor", desc: "IIT Madras", image: "/Advisory committe/S.V. Kulkarni.png" },
+  { id: 6, name: "Prof. Abdulnasir Hossen", role: "Professor", desc: "Sultan Qaboos University, Sultanate of Oman", image: "/Advisory committe/Abdulnasir Hossen.png" },
+  { id: 7, name: "Prof. Jayaraj Selvaraj", role: "Professor", desc: "Universiti Malaya", image: "/Advisory committe/Jayaraj Selvaraj.png" },
+  { id: 8, name: "Prof. Chandan Chakraborty", role: "Assistant Professor", desc: "IIT Kharagpur", image: "/Advisory committe/Chandan Chakraborty.png" },
+  { id: 9, name: "Prof. Akhtar Kalam", role: "Professor", desc: "Victoria University, Australia", image: "/Advisory committe/Akhtar Kalam.png" },
+  { id: 10, name: "Prof. Monica Siroux", role: "Professor", desc: "INSA Strasbourg, France", image: "/Advisory committe/Monica Siroux.png" },
+  { id: 11, name: "Prof. M.V. Reddy", role: "Professor", desc: "Nouveau Monde Graphite, Quebec, Montreal, Canada", image: "/Advisory committe/M.V. Reddy.png" },
+  { id: 12, name: "Prof. Valentina E. Balas", role: "Professor", desc: "University of Arad, Romania", image: "/Advisory committe/Valentina E.Balas.png" }
+];
+const technicalCommitteeData = [
+  { id: 1, name: "Yashasvi Bansal", role: "Technical Member", desc: "IIT DELHI", image: "/Technical committe/Yashasvi Bansal.png" },
+  { id: 2, name: "Subrata Chattopadhay", role: "Technical Member", desc: "NITTTR, KOLKATA", image: "/Technical committe/Subrata Chattopadhay.png" },
+  { id: 3, name: "Gayadhar Panda", role: "Technical Member", desc: "NITTTR, KOLKATA", image: "/Technical committe/Gayadhar Panda.png" },
+  { id: 4, name: "Kaushalya Jhuria", role: "Technical Member", desc: "IIT DELHI", image: "/Technical committe/Kaushalya Jhuria.png" }
+];
 const organizingCommitteeData = [
   { id: 1, name: "Prof. Dr. Subhajit Kar", role: "Organizing Committee", desc: "Associate Professor, IEM Kolkata", image: null },
   { id: 2, name: "Prof. Somnath Hazra", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: null },
@@ -175,7 +186,7 @@ export default function Committee() {
         >
           <div className="absolute -inset-1 bg-gradient-to-r from-[#FCE4A8] via-[#FFD43A] to-[#FCE4A8] rounded-full blur-md opacity-40 group-hover:opacity-80 transition duration-700" />
           <div className="relative backdrop-blur-xl bg-white/20 border border-white/40 px-6 py-2 rounded-full uppercase tracking-[0.2em] text-[10px] md:text-xs text-white font-black text-center shadow-[0_4px_20px_rgba(255,255,255,0.2)]">
-            IESIA 2025 <span className="text-[#FFD43A] mx-2">//</span> HOSTED BY DEPT. OF EE & EEE <span className="text-[#FFD43A] mx-2">|</span> IEM KOLKATA
+            IESIA 2026 <span className="text-[#FFD43A] mx-2">//</span> HOSTED BY DEPT. OF EE & EEE <span className="text-[#FFD43A] mx-2">|</span> IEM KOLKATA
           </div>
         </motion.div>
 
@@ -245,7 +256,7 @@ export default function Committee() {
               </motion.div>
             )}
 
-            {/* TAB 2: ADVISORY COMMITTEE (MOCKUP) */}
+            {/* TAB 2: ADVISORY COMMITTEE */}
             {activeTab === 'Advisory' && (
               <motion.div
                 key="Advisory"
@@ -255,13 +266,13 @@ export default function Committee() {
                 transition={{ duration: 0.3 }}
                 className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8"
               >
-                {mockAdvisory.map((person) => (
+                {advisoryCommitteeData.map((person) => (
                   <CommitteeSubCard key={person.id} person={person} />
                 ))}
               </motion.div>
             )}
 
-            {/* TAB 3: TECHNICAL COMMITTEE (MOCKUP) */}
+            {/* TAB 3: TECHNICAL COMMITTEE */}
             {activeTab === 'Technical' && (
               <motion.div
                 key="Technical"
@@ -271,7 +282,7 @@ export default function Committee() {
                 transition={{ duration: 0.3 }}
                 className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8"
               >
-                {mockTechnical.map((person) => (
+                {technicalCommitteeData.map((person) => (
                   <CommitteeSubCard key={person.id} person={person} />
                 ))}
               </motion.div>

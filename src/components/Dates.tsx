@@ -17,11 +17,11 @@ const fadeUp = {
    CHRONO-TIMELINE 
    ═══════════════════════════════════════════════════════════════ */
 const timelineNodes = [
-  { title: 'PAPER SUBMISSION STARTS', status: 'ONGOING', active: true, date: '1st March, 2025' },
-  { title: 'PAPER SUBMISSION DEADLINE', status: 'CLOSED', active: false, date: '15th April, 2025' },
-  { title: 'ACCEPTANCE NOTIFICATION', status: 'UPCOMING', active: false, date: '15th May, 2025' },
-  { title: 'CAMERA-READY SUBMISSION', status: 'UPCOMING', active: false, date: '1st June, 2025' },
-  { title: 'CONFERENCE DATES', status: 'UPCOMING', active: true, date: '25th–27th June, 2025' }
+  { title: 'PAPER SUBMISSION STARTS', status: 'ONGOING', active: true, date: '01.04.2026' },
+  { title: 'PAPER SUBMISSION ENDS', status: 'UPCOMING', active: false, date: '15.05.2026' },
+  { title: 'ACCEPTANCE NOTIFICATION', status: 'UPCOMING', active: false, date: '15th July, 2026' },
+  { title: 'EARLY BIRD REGISTRATION STARTS', status: 'UPCOMING', active: false, date: '16.07.2026' },
+  { title: 'EARLY BIRD REGISTRATION ENDS', status: 'UPCOMING', active: true, date: '16.08.2026' }
 ];
 
 function ChronoTimeline() {

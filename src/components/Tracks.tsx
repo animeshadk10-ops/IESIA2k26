@@ -11,12 +11,7 @@ const TRACKS = [
     title: 'INTELLIGENT SYSTEMS',
     subtitle: '& Network Control',
     pills: [
-      'AI In Robotics Vision', 'Autonomous Systems', 'Man-Machine System',
-      'Mechanical Drives', 'Arms And Mobile Manipulators', 'Under Water Systems',
-      'Cooperative Systems', 'Machine & Deep Learning In Robotics', 'Multi-Agent Systems',
-      'Navigation & Path Planning', 'Intelligent Control Architectures', 'Adaptive Control',
-      'Iterative Learning', 'Advanced Control Theory', 'Network Control',
-      'Nonlinear Systems', 'Robotic Vision',
+      'AI In Robotics Vision', 'Autonomous Systems', 'Man-Machine System', 'Mechanical Drives', 'Arms And Mobile Manipulators', 'Under Water Systems', 'Cooperative Systems', 'Machine & Deep Learning In Robotics', 'Multi-Agent Systems', 'Navigation & Path Planning', 'Intelligent Control Architectures', 'Adaptive Control', 'Iterative Learning', 'Advanced Control Theory', 'Network Control', 'Nonlinear Systems', 'Robotic Vision'
     ],
   },
   {
@@ -25,12 +20,7 @@ const TRACKS = [
     title: 'IOT',
     subtitle: '(Internet of Things)',
     pills: [
-      'Scalable IoT Architectures', 'Edge AI & Computing', 'Novel IoT Communication',
-      'Energy Efficiency & Battery-Less Computing', 'Large-Scale Pilots', 'Safety & Security Privacy',
-      'Distributed Ledger/Blockchain', 'Human Interaction & AR/VR/MR',
-      'Cyber-Physical Systems & Digital Twins', 'Large-Scale IoT Analytics',
-      'V2V/V2X Networks', 'Real-World Deployments', 'Industrial IoT (Manufacturing/Agri)',
-      'Environmental Sensing', 'Societal Impacts',
+      'Scalable IoT Architectures', 'Edge AI & Computing', 'Novel IoT Communication', 'Energy Efficiency & Battery-Less Computing', 'Large-Scale Pilots', 'Safety & Security Privacy', 'Distributed Ledger/Blockchain', 'Human Interaction & AR/VR/MR', 'Cyber-Physical Systems & Digital Twins', 'Large-Scale IoT Analytics', 'V2V/V2X Networks', 'Real-World Deployments', 'Industrial IoT (Manufacturing/Agri)', 'Environmental Sensing', 'Societal Impacts'
     ],
   },
   {
@@ -39,12 +29,7 @@ const TRACKS = [
     title: 'COMPUTING',
     subtitle: '& Machine Intelligence',
     pills: [
-      'Scientific Computing', 'Computer Modeling', 'Cloud Computing',
-      'Parallel Computing', 'Mobile Computing', 'AI Tools & Applications',
-      'Hybrid Intelligent Systems', 'Natural Language Processing', 'Computer Vision',
-      'Image Processing', 'Heuristic AI Planning', 'Computational Learning Theories',
-      'Intelligent System Architectures', 'Neural Networks', 'Pervasive Computing',
-      'Reasoning And Evolution',
+      'Scientific Computing', 'Computer Modeling', 'Cloud Computing', 'Parallel Computing', 'Mobile Computing', 'AI Tools & Applications', 'Hybrid Intelligent Systems', 'Natural Language Processing', 'Computer Vision', 'Image Processing', 'Heuristic AI Planning', 'Computational Learning Theories', 'Intelligent System Architectures', 'Neural Networks', 'Pervasive Computing', 'Reasoning And Evolution'
     ],
   },
 ];
@@ -54,17 +39,15 @@ const TRACKS = [
    ══════════════════════════════════════════════════════════════ */
 function DataPill({ label, delay }: { label: string; delay: number }) {
   return (
-    <motion.span
+    <motion.div
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
-      className="inline-block px-4 py-2 rounded-full text-xs font-bold tracking-wide
-                 bg-white/90 text-[#1B7B79] shadow-sm border border-white/60
-                 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#1B7B79]/20 cursor-default"
+      className="bg-white px-6 py-3.5 rounded-full text-[#1B7B79] font-bold text-sm md:text-base shadow-[0_4px_10px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_20px_rgba(27,123,121,0.15)] hover:-translate-y-1.5 transition-all duration-300 cursor-default border border-white hover:border-[#6BC4C8]/30"
     >
       {label}
-    </motion.span>
+    </motion.div>
   );
 }
 
@@ -75,36 +58,35 @@ function TrackSection({ track }: { track: typeof TRACKS[0] }) {
   const ref = useRef(null);
   
   return (
-    <div ref={ref} className="relative py-8 md:py-12">
-      <div className="bg-[#FCE4A8]/80 backdrop-blur-md rounded-[2rem] p-8 md:p-12 border border-white/50 shadow-xl shadow-[#1B7B79]/10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* LEFT — Track Info */}
-          <div className="lg:col-span-4 relative">
-            <div className="absolute -top-16 md:-top-20 -left-6 text-[100px] md:text-[140px] font-black leading-none text-white/50 select-none pointer-events-none z-0">
-              {track.num}
-            </div>
-            <div className="relative z-10 pt-4 md:pt-8 text-[#1B7B79]">
-              <span className="text-xs font-bold tracking-[0.3em] uppercase block mb-3 text-[#1B7B79]/60">
-                {track.label}
-              </span>
-              <h3 className="text-2xl md:text-4xl font-black tracking-tight mb-2 leading-tight">
-                {track.title}
-              </h3>
-              <p className="text-lg md:text-xl font-medium opacity-80">
-                {track.subtitle}
-              </p>
-            </div>
-          </div>
-
-          {/* RIGHT — Data Pill Grid */}
-          <div className="lg:col-span-8 relative z-10">
-            <div className="flex flex-wrap gap-2 md:gap-3">
-              {track.pills.map((pill, i) => (
-                <DataPill key={pill} label={pill} delay={Math.min(i * 0.02, 0.4)} />
-              ))}
-            </div>
-          </div>
+    <div 
+      ref={ref} 
+      className="w-full bg-[#FCE4A8] rounded-[2.5rem] p-10 md:p-14 relative overflow-hidden flex flex-col lg:flex-row gap-12 shadow-lg items-center"
+    >
+      {/* 1. Left Side (The Title Zone) */}
+      <div className="w-full lg:w-[35%] relative">
+        <div className="absolute top-4 left-4 text-[12rem] font-black text-white/60 select-none z-0 pointer-events-none leading-none -translate-x-8 -translate-y-8">
+          {track.num}
         </div>
+        <div className="relative z-10">
+          <div className="text-[#6BC4C8] uppercase font-black text-sm tracking-[0.2em] mb-4">
+            {track.label}
+          </div>
+          <h3 className="text-[#1B7B79] text-4xl md:text-5xl font-black leading-tight relative z-10">
+            {track.title}
+          </h3>
+          {track.subtitle && (
+            <p className="text-[#1B7B79]/80 text-xl font-bold mt-2 relative z-10">
+              {track.subtitle}
+            </p>
+          )}
+        </div>
+      </div>
+
+      {/* 2. Right Side (The Topic Cloud) */}
+      <div className="w-full lg:w-[65%] flex flex-wrap gap-4 md:gap-5 relative z-10">
+        {track.pills.map((pill, i) => (
+          <DataPill key={pill} label={pill} delay={Math.min(i * 0.05, 0.4)} />
+        ))}
       </div>
     </div>
   );
@@ -123,13 +105,13 @@ export default function Tracks() {
       {/* Background Graphic Element */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-white/20 blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/3" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pb-40">
+      <div className="relative z-10 pb-40">
         {/* Section Header */}
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           animate={inView ? { y: 0, opacity: 1 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-16 text-center"
+          className="mb-16 text-center max-w-[90rem] mx-auto px-4"
         >
           <span className="text-xs font-bold tracking-[0.3em] uppercase text-[#1B7B79]/70 block mb-4">
             Call for Papers
@@ -140,7 +122,7 @@ export default function Tracks() {
         </motion.div>
 
         {/* Track Sections */}
-        <div className="space-y-4">
+        <div className="flex flex-col gap-10 max-w-[90rem] mx-auto w-full px-4">
           {TRACKS.map((track) => (
             <TrackSection key={track.num} track={track} />
           ))}
