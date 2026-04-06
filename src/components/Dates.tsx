@@ -30,7 +30,7 @@ function ChronoTimeline() {
 
   return (
     <div ref={ref} className="relative flex flex-col h-full z-10 pt-12 md:pt-0">
-      <motion.h2 
+      <motion.h2
         custom={0} initial="hidden" animate={inView ? 'visible' : 'hidden'} variants={fadeUp}
         className="text-[#1B7B79] font-black uppercase tracking-[0.1em] text-3xl md:text-5xl mb-12"
       >
@@ -43,12 +43,12 @@ function ChronoTimeline() {
 
         <div className="flex flex-col gap-8">
           {timelineNodes.map((node, i) => (
-            <motion.div 
+            <motion.div
               key={i} custom={i + 1} initial="hidden" animate={inView ? 'visible' : 'hidden'} variants={fadeUp}
               className="relative"
             >
               {/* Circular Node Dot */}
-              <div 
+              <div
                 className={`absolute -left-[41px] top-6 w-5 h-5 rounded-full border-4 border-white z-10
                   ${node.active ? 'bg-[#E4AC3D]' : 'bg-[#1B7B79]'}`}
               />
@@ -59,9 +59,9 @@ function ChronoTimeline() {
                     {node.title}
                   </h3>
                   <span className={`text-[10px] md:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest shrink-0
-                    ${node.status === 'ONGOING' ? 'bg-[#1B7B79] text-white' : 
-                      node.status === 'CLOSED' ? 'bg-[#1B7B79]/20 text-[#1B7B79]' : 
-                      'bg-[#E4AC3D] text-white'}`}>
+                    ${node.status === 'ONGOING' ? 'bg-[#1B7B79] text-white' :
+                      node.status === 'CLOSED' ? 'bg-[#1B7B79]/20 text-[#1B7B79]' :
+                        'bg-[#E4AC3D] text-white'}`}>
                     {node.status}
                   </span>
                 </div>
@@ -86,7 +86,7 @@ function UploadProtocol() {
 
   return (
     <div ref={ref} className="relative flex flex-col h-full z-10 w-full pt-16 lg:pt-0">
-      <motion.h2 
+      <motion.h2
         custom={0} initial="hidden" animate={inView ? 'visible' : 'hidden'} variants={fadeUp}
         className="text-[#1B7B79] font-black uppercase tracking-[0.1em] text-3xl md:text-5xl mb-12"
       >
@@ -95,7 +95,7 @@ function UploadProtocol() {
 
       <div className="grid grid-cols-1 gap-6 auto-rows-min">
         {/* Main Details Panel */}
-        <motion.div 
+        <motion.div
           custom={1} initial="hidden" animate={inView ? 'visible' : 'hidden'} variants={fadeUp}
           className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-sm border border-[#1B7B79]/10"
         >
@@ -104,16 +104,17 @@ function UploadProtocol() {
           </h3>
           <p className="text-[#1B7B79] text-base md:text-lg font-medium leading-relaxed mb-6">
             Submit full paper(s) electronically through {' '}
-            <a href="https://cmt3.research.microsoft.com/" target="_blank" rel="noopener noreferrer" 
-               className="text-[#D97757] font-black hover:text-[#1B7B79] transition-colors underline">
+            <a href="https://cmt3.research.microsoft.com/" target="_blank" rel="noopener noreferrer"
+              className="text-[#D97757] font-black hover:text-[#1B7B79] transition-colors underline">
               Microsoft CMT
             </a>. All papers will be double-blind peer-reviewed.
+            The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Rules Panel */}
-          <motion.div 
+          <motion.div
             custom={2} initial="hidden" animate={inView ? 'visible' : 'hidden'} variants={fadeUp}
             className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-sm border border-[#1B7B79]/10"
           >
@@ -129,7 +130,7 @@ function UploadProtocol() {
           </motion.div>
 
           {/* Specs Panel */}
-          <motion.div 
+          <motion.div
             custom={3} initial="hidden" animate={inView ? 'visible' : 'hidden'} variants={fadeUp}
             className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-sm border border-[#1B7B79]/10"
           >
@@ -144,14 +145,17 @@ function UploadProtocol() {
         </div>
 
         {/* CTA Panel (Simple Button) */}
-        <motion.div 
+        <motion.div
           custom={4} initial="hidden" animate={inView ? 'visible' : 'hidden'} variants={fadeUp}
-          className="mt-6"
+          className="mt-6 flex flex-col gap-6"
         >
           <a href="https://cmt3.research.microsoft.com/" target="_blank" rel="noopener noreferrer"
-             className="bg-[#1B7B79] text-white px-12 py-6 rounded-3xl text-2xl font-bold hover:bg-[#145d5c] transition-colors flex items-center justify-center gap-2">
+            className="bg-[#1B7B79] text-white px-12 py-6 rounded-3xl text-2xl font-bold hover:bg-[#145d5c] transition-colors flex items-center justify-center gap-2">
             SUBMIT PAPER <span>→</span>
           </a>
+          <p className="text-sm text-[#1B7B79]/90 text-center max-w-4xl mx-auto font-normal">
+            The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.
+          </p>
         </motion.div>
       </div>
     </div>
@@ -164,15 +168,15 @@ function UploadProtocol() {
 export default function Dates() {
   return (
     <section id="dates" className="relative w-full overflow-hidden flex flex-col">
-      
+
       {/* Top Half: Solid Pale Cream (#FCE4A8) Padding */}
       <div className="w-full bg-[#FCE4A8] pt-2 md:pt-4" />
-      
+
       {/* The Wave Divider (Light Aqua connecting natively into the gradient) */}
       <div className="relative w-full overflow-hidden leading-[0] z-20 -mt-px bg-[#FCE4A8]">
-        <svg 
-          viewBox="0 0 1200 120" 
-          preserveAspectRatio="none" 
+        <svg
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
           className="relative block w-full h-[60px] md:h-[120px]"
           fill="#6BC4C8"
         >
