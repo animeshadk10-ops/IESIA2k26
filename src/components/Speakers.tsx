@@ -1,38 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
-const speakers = [
-  {
-    name: 'Dr. Arpita Ghosh',
-    title: 'Professor, Power Systems',
-    university: 'IIT Kharagpur',
-    initials: 'AG',
-  },
-  {
-    name: 'Dr. Rajesh Kumar',
-    title: 'Lead Researcher, AI & Automation',
-    university: 'IIEST Shibpur',
-    initials: 'RK',
-  },
-  {
-    name: 'Dr. Suman Dey',
-    title: 'HOD, Electrical Engineering',
-    university: 'Jadavpur University',
-    initials: 'SD',
-  },
-  {
-    name: 'Dr. Priya Sharma',
-    title: 'IoT Architecture Lead',
-    university: 'NIT Durgapur',
-    initials: 'PS',
-  },
-  {
-    name: 'Dr. Anirban Mukherjee',
-    title: 'Machine Learning Researcher',
-    university: 'ISI Kolkata',
-    initials: 'AM',
-  },
-];
+
 
 const fadeUp = {
   hidden: { y: 20, opacity: 0 },
