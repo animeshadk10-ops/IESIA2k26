@@ -19,7 +19,7 @@ const fadeUp = {
 const timelineNodes = [
   { title: 'PAPER SUBMISSION STARTS', status: 'ONGOING', active: true, date: '01.04.2026' },
   { title: 'PAPER SUBMISSION ENDS', status: 'UPCOMING', active: false, date: '15.05.2026' },
-  { title: 'ACCEPTANCE NOTIFICATION', status: 'UPCOMING', active: false, date: '15th July, 2026' },
+  { title: 'ACCEPTANCE NOTIFICATION', status: 'UPCOMING', active: false, date: '15.07.2026' },
   { title: 'EARLY BIRD REGISTRATION STARTS', status: 'UPCOMING', active: false, date: '16.07.2026' },
   { title: 'EARLY BIRD REGISTRATION ENDS', status: 'UPCOMING', active: true, date: '16.08.2026' }
 ];
@@ -108,7 +108,6 @@ function UploadProtocol() {
               className="text-[#D97757] font-black hover:text-[#1B7B79] transition-colors underline">
               Microsoft CMT
             </a>. All papers will be double-blind peer-reviewed.
-            The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.
           </p>
         </motion.div>
 

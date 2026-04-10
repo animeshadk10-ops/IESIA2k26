@@ -12,40 +12,40 @@ export default function About() {
 
   return (
     <section id="about" className="relative w-full bg-[#FCE4A8] overflow-hidden pt-20 pb-32" ref={ref}>
-      
+
       {/* Top Transition: Smoothly connects from Hero's Pale Cream bottom wave automatically */}
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-        
+
         {/* =========================================
             PART 1: THE VISION (About The Conference)
             ========================================= */}
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 lg:gap-16 items-start mb-16 md:mb-24">
-          
+
           {/* Left Column (Text & Mission - span 7) */}
-          <motion.div 
+          <motion.div
             initial="hidden" animate={isInView ? "visible" : "hidden"} variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
             className="lg:col-span-7 flex flex-col"
           >
             <motion.span variants={fadeUp} className="text-[#E4AC3D] uppercase tracking-widest text-[10px] md:text-xs font-bold mb-4 block">
               THE INTERSECTION OF TECH & AUTOMATION
             </motion.span>
-            
+
             <motion.h2 variants={fadeUp} className="text-[#1B7B79] font-black text-4xl md:text-5xl lg:text-6xl tracking-tight leading-[1.1] mb-8 drop-shadow-sm">
               About The Conference
             </motion.h2>
-            
+
             <motion.p variants={fadeUp} className="text-[#1B7B79] text-base md:text-lg lg:text-xl font-semibold leading-relaxed mb-6">
-              The 'Intelligent Electrical System and Industrial Automation' (IESIA-2025) conference is a premier event dedicated to exploring the intersection of cutting-edge technology and industrial automation. With a focus on intelligent electrical systems, this conference brings together experts, researchers, and practitioners from around the world to share insights, advancements, and best practices in the field.
+              The 'Intelligent Electrical System and Industrial Automation' (IESIA-2026) conference is a premier event dedicated to exploring the intersection of cutting-edge technology and industrial automation. With a focus on intelligent electrical systems, this conference brings together experts, researchers, and practitioners from around the world to share insights, advancements, and best practices in the field.
             </motion.p>
-            
+
             <motion.p variants={fadeUp} className="text-teal-900/70 text-sm md:text-base font-medium leading-relaxed text-left md:text-justify mb-8">
               The conference provides a platform for participants to delve into the challenges and opportunities of integrating intelligent electrical systems into industrial automation processes. Industry leaders will present case studies showcasing successful implementations, highlighting the benefits of improved efficiency, reduced downtime, and increased safety. Additionally, the event fosters networking opportunities, allowing participants to forge valuable connections with peers, potential collaborators, and technology providers. Whether you're an electrical engineer, automation specialist, or a researcher in the field, this conference offers a unique opportunity to stay abreast of the latest trends and innovations shaping the future of industrial automation. By attending, you'll gain valuable insights that can be directly applied to enhance productivity, optimize processes, and drive innovation in the industrial sector.
             </motion.p>
           </motion.div>
 
           {/* Right Column (The Visuals - span 5) */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 30 }} animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }} transition={{ duration: 1, delay: 0.3 }}
             className="lg:col-span-5 relative w-full h-[400px] md:h-[500px]"
           >
@@ -53,7 +53,7 @@ export default function About() {
             <div className="absolute top-0 right-0 w-[85%] h-[75%] rounded-[40px] shadow-2xl overflow-hidden shadow-teal-900/20 border-4 border-white/40 group">
               <img src="/electronics-asthe.png" alt="Arduino Advanced Engineering" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
             </div>
-            
+
             {/* Image 2 (Small, overlapping) */}
             <div className="absolute bottom-4 left-0 w-[60%] h-[55%] rounded-3xl overflow-hidden shadow-2xl border-8 border-[#FCE4A8] -ml-2 md:-ml-12 mt-24 shadow-teal-900/30 group">
               <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80" alt="Networking Professionals" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -62,7 +62,7 @@ export default function About() {
         </div>
 
         {/* The Topics Bento Row */}
-        <motion.div 
+        <motion.div
           initial="hidden" animate={isInView ? "visible" : "hidden"} variants={{ visible: { transition: { staggerChildren: 0.1, delayChildren: 0.5 } } }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full relative z-20"
         >
@@ -103,7 +103,7 @@ export default function About() {
         {/* =========================================
             PART 2: THE LEGACY (About The Department)
             ========================================= */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 30 }} animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.95, y: 30 }} transition={{ duration: 0.8, delay: 0.5 }}
           className="bg-[#1B7B79] rounded-[40px] md:rounded-[60px] p-6 md:p-14 lg:p-16 mt-16 md:mt-24 relative overflow-hidden shadow-2xl shadow-teal-900/40 border border-[#6BC4C8]/20 z-10"
         >
@@ -185,9 +185,9 @@ export default function About() {
           SVG SWEEPING UPWARD CURVE TO TRACKS SECTION
           ========================================= */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20 translate-y-[2px]">
-        <svg 
-          viewBox="0 0 1200 120" 
-          preserveAspectRatio="none" 
+        <svg
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
           className="relative block w-full h-[120px] md:h-[180px]"
           // Needs to match the top of the TRACKS gradient which is Mustard Gold (#E4AC3D)
           fill="#E4AC3D"

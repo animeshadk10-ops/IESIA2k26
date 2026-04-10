@@ -52,7 +52,7 @@ export default function Venue() {
               <div className="w-full aspect-video lg:aspect-square max-h-[450px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10 relative z-10 group">
                 <div className="absolute inset-0 bg-[#E4AC3D]/20 mix-blend-overlay pointer-events-none z-20 transition-opacity duration-500 group-hover:opacity-0" />
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1m2!1s0x3a0275cc1eb3e0ab%3A0xbcc0e52dd49dffd6!2sInstitute%20of%20Engineering%20%26%20Management%20(IEM)!5e0!3m2!1sen!2sin!4v1714412345678!5m2!1sen!2sin" 
+                  src="https://maps.google.com/maps?q=Institute%20of%20Engineering%20%26%20Management%20(IEM)%20Gurukul%20Campus%20Kolkata&t=&z=15&ie=UTF8&iwloc=&output=embed" 
                   width="100%" 
                   height="100%" 
                   style={{ border: 0 }} 

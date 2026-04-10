@@ -69,30 +69,18 @@ export default function Speakers() {
           </p>
         </motion.div>
 
-        {/* Speaker Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          {speakers.map((speaker, i) => (
-            <motion.div
-              key={speaker.name}
-              initial="hidden"
-              animate={isInView ? 'visible' : 'hidden'}
-              variants={fadeUp}
-              custom={i + 1}
-              className="group glass-panel rounded-2xl p-6 flex flex-col items-center text-center transition-all duration-500 hover:glow-blue cursor-pointer"
-            >
-              {/* Avatar placeholder */}
-              <div className="w-20 h-20 rounded-full bg-surface-light border border-border flex items-center justify-center mb-5 transition-all duration-500 group-hover:border-silicon-blue/50 group-hover:shadow-[0_0_20px_rgba(0,102,255,0.15)]">
-                <span className="text-xl font-bold text-text-muted group-hover:text-silicon-blue transition-colors duration-500">
-                  {speaker.initials}
-                </span>
-              </div>
-
-              <h3 className="text-sm font-bold text-text-primary tracking-tight">{speaker.name}</h3>
-              <p className="text-[12px] text-text-muted mt-1 leading-relaxed">{speaker.title}</p>
-              <p className="text-[11px] text-text-muted/60 mt-0.5">{speaker.university}</p>
-            </motion.div>
-          ))}
-        </div>
+        {/* Speaker Information Pending */}
+        <motion.div
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeUp}
+          custom={1}
+          className="flex justify-center items-center py-20 px-4 glass-panel rounded-2xl border border-border"
+        >
+          <h1 className="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-center uppercase tracking-wider drop-shadow-md">
+            Speakers to be notified later
+          </h1>
+        </motion.div>
       </div>
     </section>
   );

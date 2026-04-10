@@ -2,39 +2,42 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 const row1Images = [
-  { url: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=800&h=600', aspect: 'w-[250px] md:w-[500px]' },
-  { url: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&q=80&w=600&h=600', aspect: 'w-[200px] md:w-[350px] aspect-square' },
-  { url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800&h=600', aspect: 'w-[250px] md:w-[500px]' },
-  { url: 'https://images.unsplash.com/photo-1551818255-e6e10975bc17?auto=format&fit=crop&q=80&w=600&h=600', aspect: 'w-[200px] md:w-[350px] aspect-square' },
-  { url: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800&h=600', aspect: 'w-[250px] md:w-[500px]' },
+  { url: '/Gallery/Judging Committee.jpeg', aspect: 'w-[250px] md:w-[500px]' },
+  { url: '/Gallery/Pannel Discussion.jpeg', aspect: 'w-[200px] md:w-[350px] aspect-square' },
+  { url: '/Gallery/judging committee2.JPG', aspect: 'w-[250px] md:w-[500px]' },
+  { url: '/Gallery/judging committee3.JPG', aspect: 'w-[200px] md:w-[350px] aspect-square' },
+  { url: '/Gallery/key note speaker4.JPG', aspect: 'w-[250px] md:w-[500px]' },
+  { url: '/Gallery/keynote speaker2 (1).JPG', aspect: 'w-[200px] md:w-[350px] aspect-square' },
+  { url: '/Gallery/keynote speaker3.JPG', aspect: 'w-[250px] md:w-[500px]' },
 ];
 
 const row2Images = [
-  { url: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&q=80&w=600&h=600', aspect: 'w-[200px] md:w-[350px] aspect-square' },
-  { url: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800&h=600', aspect: 'w-[250px] md:w-[500px]' },
-  { url: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=600&h=600', aspect: 'w-[200px] md:w-[350px] aspect-square' },
-  { url: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=800&h=600', aspect: 'w-[250px] md:w-[500px]' },
-  { url: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=600&h=600', aspect: 'w-[200px] md:w-[350px] aspect-square' },
+  { url: '/Gallery/keynote speakers.jpeg', aspect: 'w-[200px] md:w-[350px] aspect-square' },
+  { url: '/Gallery/opening ceremony.jpeg', aspect: 'w-[200px] md:w-[350px] aspect-square' },
+  { url: '/Gallery/opening ceremony2.JPG', aspect: 'w-[250px] md:w-[500px]' },
+  { url: '/Gallery/opening ceremony3.JPG', aspect: 'w-[200px] md:w-[350px] aspect-square' },
+  { url: '/Gallery/panel discussion2.JPG', aspect: 'w-[250px] md:w-[500px]' },
+  { url: '/Gallery/panel discussion3.JPG', aspect: 'w-[200px] md:w-[350px] aspect-square' },
 ];
 
 function MarqueeRow({ images, direction = 'left', speed = 40 }: { images: { url: string, aspect: string }[], direction?: 'left' | 'right', speed?: number }) {
   // Duplicate images to create seamless loop
   const tripledImages = [...images, ...images, ...images];
-  
+
   return (
     <div className="relative w-full overflow-hidden py-4 group">
-      <div 
+      <div
         className={`flex w-max gap-8 ${direction === 'left' ? 'animate-marquee-left' : 'animate-marquee-right'} group-hover:[animation-play-state:paused]`}
         style={{ '--marquee-speed': `${speed}s` } as React.CSSProperties}
       >
         {tripledImages.map((img, i) => (
-          <div 
-            key={i} 
+          <div
+            key={i}
             className={`relative rounded-[32px] overflow-hidden shadow-2xl shadow-[#1B7B79]/15 border-4 border-white shrink-0 h-[250px] md:h-[300px] lg:h-[350px] ${img.aspect} cursor-pointer group/card`}
           >
-            <img 
-              src={img.url} 
-              alt="IESIA Conference Glimpse" 
+            <img
+              src={img.url}
+              alt="IESIA Conference Glimpse"
               className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500"
               loading="lazy"
             />
@@ -62,14 +65,14 @@ export default function Gallery() {
 
       <div className="relative z-10 w-full flex flex-col items-center mt-12 mb-16">
         <motion.div
-           initial={{ opacity: 0, y: 30 }}
-           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-           transition={{ duration: 0.8, ease: "easeOut" }}
-           className="relative text-center px-4"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative text-center px-4"
         >
           {/* Light Aqua Glow Blob Behind Text */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-sm h-16 bg-[#6BC4C8]/50 blur-3xl rounded-full z-0 pointer-events-none" />
-          
+
           <h2 className="text-[#1B7B79] text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-4 relative z-10 uppercase drop-shadow-sm">
             Glimpses of IESIA 2025
           </h2>

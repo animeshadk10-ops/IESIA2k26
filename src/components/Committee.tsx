@@ -32,7 +32,7 @@ const programCommitteeData = [
     name: "Prof. Rajat Subhra Pal",
     role: "General Chair",
     desc: "H.O.D (EEE Dept), IEM Kolkata. Expert in intelligent systems and industrial automation.",
-    image: null // Dummy icon
+    image: "/program committe/prof. Rajat.jpg"
   },
   {
     id: 5,
@@ -114,7 +114,7 @@ export default function Committee() {
 
   // Unified Sub-Card Component
   const CommitteeSubCard = ({ person }: { person: any }) => (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
@@ -122,7 +122,7 @@ export default function Committee() {
       className="relative group h-full"
     >
       <div className="relative group h-full bg-white/10 border border-white/20 rounded-[2rem] p-6 flex flex-col items-center text-center overflow-hidden transition-all duration-500 hover:-translate-y-3 hover:bg-white/20 hover:border-[#FCE4A8] hover:shadow-2xl shadow-xl shadow-[#1B7B79]/10">
-        
+
         {/* Subtle hover background sweep */}
         <div className="absolute inset-0 bg-gradient-to-t from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
@@ -137,15 +137,15 @@ export default function Committee() {
             )}
           </div>
         </div>
-        
+
         <h4 className="text-white text-xl md:text-2xl font-bold tracking-wide leading-tight group-hover:text-[#FFD43A] transition-colors drop-shadow-md">
           {person.name}
         </h4>
-        
+
         <span className="text-[#E4AC3D] text-[10px] md:text-xs font-black tracking-[0.2em] uppercase mt-3 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full shadow-sm border border-[#E4AC3D]/20">
           {person.role}
         </span>
-        
+
         <p className="text-[#FCE4A8] text-sm mt-5 leading-relaxed font-medium">
           {person.desc}
         </p>
@@ -155,20 +155,20 @@ export default function Committee() {
   );
 
   return (
-    <section 
-      id="committee" 
+    <section
+      id="committee"
       className="relative pt-32 pb-48 min-h-screen bg-gradient-to-br from-[#1B7B79] via-[#1B7B79] to-[#6BC4C8] overflow-hidden font-sans text-white/90 selection:bg-[#E4AC3D]/40"
     >
       {/* =========================================
           BACKGROUND / ENVIRONMENT: THE COLOR PLASMA
           ========================================= */}
-      
+
       {/* Orb 1: Top Left Gold */}
       <div className="absolute -top-[20%] -left-[10%] w-[800px] h-[800px] bg-[#E4AC3D]/40 rounded-full blur-[150px] pointer-events-none mix-blend-overlay z-0" />
-      
+
       {/* Orb 2: Bottom Right Yellow */}
       <div className="absolute -bottom-[20%] -right-[10%] w-[800px] h-[800px] bg-[#FFD43A]/30 rounded-full blur-[150px] pointer-events-none mix-blend-overlay z-0" />
-      
+
       {/* Orb 3: Center Aqua */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[500px] bg-[#6BC4C8]/50 rounded-full blur-[150px] pointer-events-none z-0" />
 
@@ -176,9 +176,9 @@ export default function Committee() {
           CONTENT WRAPPER
           ========================================= */}
       <div className="relative z-10 w-full flex flex-col items-center mx-auto px-6">
-        
+
         {/* Holographic Department Badge */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -192,7 +192,7 @@ export default function Committee() {
 
         {/* Main Header */}
         <div className="text-center mb-16 flex flex-col items-center">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
@@ -214,9 +214,8 @@ export default function Committee() {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`relative px-6 py-3 rounded-full text-xs md:text-sm font-black tracking-widest uppercase transition-colors duration-300 outline-none shrink-0 ${
-                    isActive ? 'text-[#1B7B79]' : 'text-white hover:text-[#FCE4A8]'
-                  }`}
+                  className={`relative px-6 py-3 rounded-full text-xs md:text-sm font-black tracking-widest uppercase transition-colors duration-300 outline-none shrink-0 ${isActive ? 'text-[#1B7B79]' : 'text-white hover:text-[#FCE4A8]'
+                    }`}
                 >
                   {isActive && (
                     <motion.div
@@ -237,9 +236,9 @@ export default function Committee() {
             2. THE "BIG CARD" (The Glass Vault)
             ========================================= */}
         <div className="w-full max-w-7xl mx-auto mt-12 bg-white/10 backdrop-blur-3xl border-2 border-white/20 rounded-[3rem] p-8 md:p-12 shadow-[0_20px_50px_rgba(27,123,121,0.5)] relative overflow-hidden">
-          
+
           <AnimatePresence mode="wait">
-            
+
             {/* TAB 1: PROGRAM COMMITTEE */}
             {activeTab === 'Program' && (
               <motion.div

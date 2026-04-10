@@ -11,13 +11,24 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build for production
+        run: npm run build
+
       - name: Sync Project and Nginx
         run: |
           # 1. Ensure the destination directory exists
           sudo mkdir -p /var/www/html/folder
 
-          # 2. Sync files to the specific subfolder
-          sudo rsync -av --delete --exclude='.git/' --exclude='.github/' . /var/www/html/folder/
+          # 2. Sync the compiled build folder (dist/) to the specific subfolder
+          sudo rsync -av --delete dist/ /var/www/html/folder/
 
           # 3. Set Permissions
           sudo chown -R www-data:www-data /var/www/html/folder
