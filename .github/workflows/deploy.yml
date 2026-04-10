@@ -17,42 +17,57 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Build for production
+        env:
+          NODE_OPTIONS: "--max-old-space-size=1024"
         run: npm run build
 
-      - name: Sync Project and Nginx
+      - name: Server Medic & Deploy
         run: |
-          # 1. Ensure the destination directory exists
+          echo "==== Executing Emergency Server Medic Configuration ===="
+          # 1. Ensure directories
           sudo mkdir -p /var/www/html/folder
+          sudo mkdir -p /var/www/html/iesia2025
 
-          # 2. Sync the compiled build folder (dist/) to the specific subfolder
+          # 2. Deploy Built Assets
           sudo rsync -av --delete dist/ /var/www/html/folder/
-
-          # 3. Set Permissions
           sudo chown -R www-data:www-data /var/www/html/folder
           sudo chmod -R 755 /var/www/html/folder
 
-          # 4. Setup Nginx Server Block
-          # Note: The root must point to the folder containing index.html
-          sudo tee /etc/nginx/sites-available/folder <<EOF
+          # 3. Rescue target iesia2025 Nginx Block
+          sudo tee /etc/nginx/sites-available/iesia2025 <<'EOF'
           server {
               listen 80;
-              server_name _;
-
-              root /var/www/html/folder;
+              server_name iesia2025.smartsociety.org;
+              root /var/www/html/iesia2025;
               index index.html;
-
               location / {
-                  try_files \$uri \$uri/ /index.html;
+                  try_files $uri $uri/ /index.html;
               }
           }
           EOF
 
-          # 5. Link and Cleanup
-          sudo ln -sf /etc/nginx/sites-available/folder /etc/nginx/sites-enabled/
-          sudo rm -f /etc/nginx/sites-enabled/default
+          # 4. Correct target iesia2026 Nginx Block
+          sudo tee /etc/nginx/sites-available/iesia2026 <<'EOF'
+          server {
+              listen 80;
+              server_name iesia2026.smartsociety.org www.iesia2026.smartsociety.org _;
+              root /var/www/html/folder;
+              index index.html;
+              location / {
+                  try_files $uri $uri/ /index.html;
+              }
+          }
+          EOF
 
-          # 6. Apply Changes
-          sudo nginx -t && sudo systemctl reload nginx
+          # 5. Enable blocks and test
+          sudo ln -sf /etc/nginx/sites-available/iesia2025 /etc/nginx/sites-enabled/
+          sudo ln -sf /etc/nginx/sites-available/iesia2026 /etc/nginx/sites-enabled/
+          sudo nginx -t
+
+          # 6. Apply Network Changes & Restart Daemons
+          sudo systemctl reload nginx
+          sudo systemctl restart cloudflared || true
+          echo "==== Server Medic Completed ===="
