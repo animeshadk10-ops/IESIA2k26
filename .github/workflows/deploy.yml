@@ -78,7 +78,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add nginx-debug.log cloudflared-debug.log cloudflared-journal.log nginx-sites.log
           git commit -m "chore: debug server status [skip ci]" || true
-          git push origin main || true
+          git push origin HEAD:main || true
 
           # 6. Apply Network Changes & Restart Daemons
           sudo nginx -t && sudo systemctl reload nginx
