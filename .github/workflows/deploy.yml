@@ -65,9 +65,23 @@ jobs:
           # 5. Enable blocks and test
           sudo ln -sf /etc/nginx/sites-available/iesia2025 /etc/nginx/sites-enabled/
           sudo ln -sf /etc/nginx/sites-available/iesia2026 /etc/nginx/sites-enabled/
-          sudo nginx -t
+          sudo rm -f /etc/nginx/sites-enabled/folder || true
+          sudo rm -f /etc/nginx/sites-enabled/default || true
+          
+          # We'll save diagnostic data before trying to test/reload
+          sudo nginx -t > nginx-debug.log 2>&1 || true
+          sudo systemctl status cloudflared > cloudflared-debug.log 2>&1 || true
+          sudo journalctl -u cloudflared -n 50 > cloudflared-journal.log 2>&1 || true
+          ls -la /etc/nginx/sites-enabled/ > nginx-sites.log || true
+          
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add nginx-debug.log cloudflared-debug.log cloudflared-journal.log nginx-sites.log
+          git commit -m "chore: debug server status [skip ci]" || true
+          git push origin main || true
 
           # 6. Apply Network Changes & Restart Daemons
-          sudo systemctl reload nginx
+          sudo nginx -t && sudo systemctl reload nginx
+          sudo systemctl start cloudflared || true
           sudo systemctl restart cloudflared || true
           echo "==== Server Medic Completed ===="
