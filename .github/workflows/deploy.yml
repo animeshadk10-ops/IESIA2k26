@@ -1,4 +1,5 @@
 name: Deploy Static Site
+
 on:
   push:
     branches: [main]
@@ -7,24 +8,30 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Sync Project and Nginx
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Project
+        run: npm run build
+
+      - name: Deploy to Nginx
         run: |
-          # 1. Ensure the destination directory exists
+          # Create folder
           sudo mkdir -p /var/www/html/iesia2026
 
-          # 2. Sync files to the specific subfolder
-          sudo rsync -av --delete --exclude='.git/' --exclude='.github/' . /var/www/html/iesia2026/
+          # Copy ONLY dist files
+          sudo rsync -av --delete dist/ /var/www/html/iesia2026/
 
-          # 3. Set Permissions
+          # Permissions
           sudo chown -R www-data:www-data /var/www/html/iesia2026
           sudo chmod -R 755 /var/www/html/iesia2026
 
-          # 4. Setup Nginx Server Block
-          # Note: The root must point to the folder containing index.html
+          # Nginx config
           sudo tee /etc/nginx/sites-available/iesia2026 <<EOF
           server {
               listen 80;
@@ -34,14 +41,14 @@ jobs:
               index index.html;
 
               location / {
-                  try_files \$uri \$uri/ /index.html;
+                  try_files \$uri /index.html;
               }
           }
           EOF
 
-          # 5. Link and Cleanup
+          # Enable site
           sudo ln -sf /etc/nginx/sites-available/iesia2026 /etc/nginx/sites-enabled/
           sudo rm -f /etc/nginx/sites-enabled/default
 
-          # 6. Apply Changes
+          # Reload nginx
           sudo nginx -t && sudo systemctl reload nginx
