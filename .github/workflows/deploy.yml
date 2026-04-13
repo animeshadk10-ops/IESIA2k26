@@ -11,77 +11,83 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-
-      - name: Build for production
-        env:
-          NODE_OPTIONS: "--max-old-space-size=1024"
-        run: npm run build
-
-      - name: Server Medic & Deploy
+      - name: Sync Project and Nginx
         run: |
-          echo "==== Executing Emergency Server Medic Configuration ===="
-          # 1. Ensure directories
-          sudo mkdir -p /var/www/html/folder
-          sudo mkdir -p /var/www/html/iesia2025
+          # 1. Ensure the destination directory exists
+          sudo mkdir -p /var/www/html/iesia2026
 
-          # 2. Deploy Built Assets
-          sudo rsync -av --delete dist/ /var/www/html/folder/
-          sudo chown -R www-data:www-data /var/www/html/folder
-          sudo chmod -R 755 /var/www/html/folder
+          # 2. Sync files to the specific subfolder
+          sudo rsync -av --delete --exclude='.git/' --exclude='.github/' . /var/www/html/iesia2026/
 
-          # 3. Rescue target iesia2025 Nginx Block
-          sudo tee /etc/nginx/sites-available/iesia2025 <<'EOF'
+          # 3. Set Permissions
+          sudo chown -R www-data:www-data /var/www/html/iesia2026
+          sudo chmod -R 755 /var/www/html/iesia2026
+
+          # 4. Setup Nginx Server Block
+          # Note: The root must point to the folder containing index.html
+          sudo tee /etc/nginx/sites-available/iesia2026 <<EOF
           server {
               listen 80;
-              server_name iesia2025.smartsociety.org;
-              root /var/www/html/iesia2025;
+              server_name _;
+
+              root /var/www/html/iesia2026;
               index index.html;
+
               location / {
-                  try_files $uri $uri/ /index.html;
+                  try_files \$uri \$uri/ /index.html;
               }
           }
           EOF
 
-          # 4. Correct target iesia2026 Nginx Block
-          sudo tee /etc/nginx/sites-available/iesia2026 <<'EOF'
-          server {
-              listen 80;
-              server_name iesia2026.smartsociety.org www.iesia2026.smartsociety.org _;
-              root /var/www/html/folder;
-              index index.html;
-              location / {
-                  try_files $uri $uri/ /index.html;
-              }
-          }
-          EOF
-
-          # 5. Enable blocks and test
-          sudo ln -sf /etc/nginx/sites-available/iesia2025 /etc/nginx/sites-enabled/
+          # 5. Link and Cleanup
           sudo ln -sf /etc/nginx/sites-available/iesia2026 /etc/nginx/sites-enabled/
-          sudo rm -f /etc/nginx/sites-enabled/folder || true
-          sudo rm -f /etc/nginx/sites-enabled/default || true
-          
-          # We'll save diagnostic data before trying to test/reload
-          sudo nginx -t > nginx-debug.log 2>&1 || true
-          sudo systemctl status cloudflared > cloudflared-debug.log 2>&1 || true
-          sudo journalctl -u cloudflared -n 50 > cloudflared-journal.log 2>&1 || true
-          ls -la /etc/nginx/sites-enabled/ > nginx-sites.log || true
-          
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add nginx-debug.log cloudflared-debug.log cloudflared-journal.log nginx-sites.log
-          git commit -m "chore: debug server status [skip ci]" || true
-          git push origin HEAD:main || true
+          sudo rm -f /etc/nginx/sites-enabled/default
 
-          # 6. Apply Network Changes & Restart Daemons
+          # 6. Apply Changes
+          sudo nginx -t && sudo systemctl reload nginxname: Deploy Static Site
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Sync Project and Nginx
+        run: |
+          # 1. Ensure the destination directory exists
+          sudo mkdir -p /var/www/html/iesia2026
+
+          # 2. Sync files to the specific subfolder
+          sudo rsync -av --delete --exclude='.git/' --exclude='.github/' . /var/www/html/iesia2026/
+
+          # 3. Set Permissions
+          sudo chown -R www-data:www-data /var/www/html/iesia2026
+          sudo chmod -R 755 /var/www/html/iesia2026
+
+          # 4. Setup Nginx Server Block
+          # Note: The root must point to the folder containing index.html
+          sudo tee /etc/nginx/sites-available/iemis_ai <<EOF
+          server {
+              listen 80;
+              server_name _;
+
+              root /var/www/html/iesia2026;
+              index index.html;
+
+              location / {
+                  try_files \$uri \$uri/ /index.html;
+              }
+          }
+          EOF
+
+          # 5. Link and Cleanup
+          sudo ln -sf /etc/nginx/sites-available/iesia2026 /etc/nginx/sites-enabled/
+          sudo rm -f /etc/nginx/sites-enabled/default
+
+          # 6. Apply Changes
           sudo nginx -t && sudo systemctl reload nginx
-          sudo systemctl start cloudflared || true
-          sudo systemctl restart cloudflared || true
-          echo "==== Server Medic Completed ===="
