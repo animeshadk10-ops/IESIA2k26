@@ -3,15 +3,15 @@ export default function Footer() {
     <footer className="relative w-full overflow-hidden bg-gradient-to-b from-[#1B7B79] to-[#104F4D] pt-24 pb-8">
       {/* 4-column Grid */}
       <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10 text-center lg:text-left">
-        
+
         {/* COLUMN 1: CONTACT US */}
         <div className="flex flex-col items-center lg:items-start">
           <h3 className="text-[#E4AC3D] font-bold text-xl uppercase tracking-wider mb-6">Contact Us</h3>
           <p className="text-[#FCE4A8] text-sm mb-4 leading-relaxed font-medium">
             D-1, EP Block, Sector V, Salt Lake City, Kolkata, WB 700091
           </p>
-          <a href="mailto:IESIA2025@iem.edu.in" className="text-[#6BC4C8] hover:text-white transition-colors text-sm font-bold mb-4 block underline underline-offset-4">
-            IESIA2025@iem.edu.in
+          <a href="mailto:[EMAIL_ADDRESS]" className="text-[#6BC4C8] hover:text-white transition-colors text-sm font-bold mb-4 block underline underline-offset-4">
+            iesia@iem.edu.in
           </a>
           <p className="text-[#FCE4A8] text-sm mb-6 leading-relaxed font-semibold">
             8436443479 <br /> 9163748403 <br /> 7003254267
@@ -69,17 +69,17 @@ export default function Footer() {
               <input type="text" id="name" required className="peer bg-transparent border-b-2 border-white/20 focus:border-[#E4AC3D] text-white w-full py-2 outline-none transition-colors text-sm" placeholder=" " />
               <label htmlFor="name" className="absolute left-0 top-2 text-white/50 text-sm peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#E4AC3D] peer-valid:-top-4 peer-valid:text-xs peer-valid:text-[#6BC4C8] transition-all duration-300 pointer-events-none">Name</label>
             </div>
-            
+
             <div className="relative">
               <input type="email" id="email" required className="peer bg-transparent border-b-2 border-white/20 focus:border-[#E4AC3D] text-white w-full py-2 outline-none transition-colors text-sm" placeholder=" " />
               <label htmlFor="email" className="absolute left-0 top-2 text-white/50 text-sm peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#E4AC3D] peer-valid:-top-4 peer-valid:text-xs peer-valid:text-[#6BC4C8] transition-all duration-300 pointer-events-none">Email Address</label>
             </div>
-            
+
             <div className="relative mt-2">
               <textarea id="message" required rows={3} className="peer bg-transparent border-b-2 border-white/20 focus:border-[#E4AC3D] text-white w-full py-2 outline-none transition-colors text-sm resize-none" placeholder=" "></textarea>
               <label htmlFor="message" className="absolute left-0 top-2 text-white/50 text-sm peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#E4AC3D] peer-valid:-top-4 peer-valid:text-xs peer-valid:text-[#6BC4C8] transition-all duration-300 pointer-events-none">Your Message</label>
             </div>
-            
+
             <button type="button" className="mt-4 bg-[#E4AC3D] text-[#1B7B79] font-black uppercase tracking-wider py-4 rounded-full hover:bg-[#FFD43A] hover:shadow-[0_4px_20px_rgba(228,172,61,0.5)] transition-all duration-300 hover:scale-[1.03] text-sm">
               Send Message
             </button>

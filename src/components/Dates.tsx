@@ -18,7 +18,7 @@ const fadeUp = {
    ═══════════════════════════════════════════════════════════════ */
 const timelineNodes = [
   { title: 'PAPER SUBMISSION STARTS', status: 'ONGOING', active: true, date: '01.04.2026' },
-  { title: 'PAPER SUBMISSION ENDS', status: 'UPCOMING', active: false, date: '15.05.2026' },
+  { title: 'PAPER SUBMISSION ENDS', status: 'UPCOMING', active: false, date: '05.06.2026' },
   { title: 'ACCEPTANCE NOTIFICATION', status: 'UPCOMING', active: false, date: '15.07.2026' },
   { title: 'EARLY BIRD REGISTRATION STARTS', status: 'UPCOMING', active: false, date: '16.07.2026' },
   { title: 'EARLY BIRD REGISTRATION ENDS', status: 'UPCOMING', active: true, date: '16.08.2026' }

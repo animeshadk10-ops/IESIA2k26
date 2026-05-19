@@ -61,6 +61,13 @@ const programCommitteeData = [
     role: "Co-Convenor",
     desc: "Assistant Professor, IEM Kolkata.",
     image: "/program committe/Pratik De Sarkar.jpg"
+  },
+  {
+    id: 9,
+    name: "Prof. Neeta Sahay",
+    role: "Convenor",
+    desc: "Assistant Professor, IEM Kolkata.",
+    image: "/program committe/neetamam.png"
   }
 ];
 
@@ -87,20 +94,14 @@ const technicalCommitteeData = [
   { id: 4, name: "Kaushalya Jhuria", role: "Technical Member", desc: "IIT DELHI", image: "/Technical committe/Kaushalya Jhuria.png" }
 ];
 const organizingCommitteeData = [
-  { id: 1, name: "Prof. Dr. Subhajit Kar", role: "Organizing Committee", desc: "Associate Professor, IEM Kolkata", image: null },
-  { id: 2, name: "Prof. Somnath Hazra", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: null },
-  { id: 3, name: "Prof. Dr. Sanjoy Mondal", role: "Organizing Committee", desc: "Associate Professor, IEM Kolkata", image: null },
-  { id: 4, name: "Prof. Dr. Mandakinee Bandyopadhyay", role: "Organizing Committee", desc: "Associate Professor, IEM Kolkata", image: null },
-  { id: 5, name: "Prof. Debasish Jana", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: null },
-  { id: 6, name: "Prof. Rajat Subhra Pal", role: "Organizing Committee", desc: "H.O.D (EEE Department), IEM Kolkata", image: null },
-  { id: 7, name: "Prof. Tapas Kumar Dutta", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: null },
-  { id: 8, name: "Prof. Nirban Kumar Saha", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: null },
-  { id: 9, name: "Dr. Sourav Das", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: null },
-  { id: 10, name: "Prof. Arijita Das", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: null },
-  { id: 11, name: "Prof. Neeta Sahay", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: null },
-  { id: 12, name: "Prof. Dr. Swati Chowdhuri", role: "Organizing Committee", desc: "Professor, IEM Kolkata", image: null },
-  { id: 13, name: "Prof. Ranjita Chowdhury", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: null },
-  { id: 14, name: "Prof. Dr. Madhumita Pal", role: "Organizing Committee", desc: "Associate Professor, IEM Kolkata", image: null }
+  { id: 1, name: "Prof. Dr. Subhajit Kar", role: "Organizing Committee", desc: "Associate Professor, IEM Kolkata", image: "/program committe/Prof Dr Subhajit Kar.jpg" },
+  { id: 2, name: "Prof. Dr. Somnath Hazra", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: "/program committe/Somnath.jpg" },
+  { id: 3, name: "Prof. Dr. Sanjoy Mondal", role: "Organizing Committee", desc: "Associate Professor, IEM Kolkata", image: "/program committe/Prof. Dr. Sanjoy Mondal.jpg" },
+  { id: 4, name: "Prof. Dr. Mandakinee Bandyopadhyay", role: "Organizing Committee", desc: "Associate Professor, IEM Kolkata", image: "/program committe/Prof. (Dr.) Mandakinee Bandyopadhyay.jpg" },
+  { id: 5, name: "Prof. Dr. Rajat Subhra Pal", role: "Organizing Committee", desc: "H.O.D (EEE Department), IEM Kolkata", image: "/program committe/prof. Rajat.jpg" },
+  { id: 6, name: "Prof. Dr. Neeta Sahay", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: "/program committe/neetamam.png" },
+  { id: 7, name: "Prof. Dr. Pratik De Sarkar", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: "/program committe/Pratik De Sarkar.jpg" },
+  { id: 8, name: "Prof. Dr. Arijita Das", role: "Organizing Committee", desc: "Assistant Professor, IEM Kolkata", image: "/program committe/Arijita.jpg" }
 ];
 
 const tabs = ['Program', 'Advisory', 'Technical', 'Organizing'];
