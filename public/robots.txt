@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://iesia2026.smartsociety.org/sitemap.xml

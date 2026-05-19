@@ -45,16 +45,16 @@ export default function Hero() {
         
         {/* Overline */}
         <motion.div custom={0} initial="hidden" animate="visible" variants={fadeUp}>
-          <h2 className="text-white/90 text-sm md:text-base font-bold tracking-[0.25em] uppercase mb-4 md:mb-6 drop-shadow-md">
+          <h3 className="text-white/90 text-sm md:text-base font-bold tracking-[0.25em] uppercase mb-4 md:mb-6 drop-shadow-md">
             3RD INTERNATIONAL CONFERENCE
-          </h2>
+          </h3>
         </motion.div>
 
         {/* Massive H1 title with GLOW */}
         <motion.div custom={1} initial="hidden" animate="visible" variants={fadeUp}>
-          <h1 className="text-[5rem] sm:text-[7rem] md:text-[9rem] lg:text-[11rem] font-bold tracking-tighter text-white drop-shadow-[0_0_40px_rgba(255,255,255,0.4)] leading-[0.9] mb-4 md:mb-6">
+          <h2 className="text-[5rem] sm:text-[7rem] md:text-[9rem] lg:text-[11rem] font-bold tracking-tighter text-white drop-shadow-[0_0_40px_rgba(255,255,255,0.4)] leading-[0.9] mb-4 md:mb-6">
             IESIA 2026
-          </h1>
+          </h2>
         </motion.div>
 
         {/* Subtitle */}
