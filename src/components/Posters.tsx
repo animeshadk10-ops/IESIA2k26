@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 export default function ConferencePoster() {
   const posterPath = '/Logos/IESIA FINAL POSTER.png';
