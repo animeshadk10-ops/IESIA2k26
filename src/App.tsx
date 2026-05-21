@@ -8,12 +8,14 @@ import Committee from './components/Committee';
 import Gallery from './components/Gallery';
 import Speakers from './components/Speakers';
 import Venue from './components/Venue';
+import Poster from './components/Posters';
 import Footer from './components/Footer';
 import Registration from './components/Registration';
 
 function App() {
   return (
     <div className="relative text-pale-cream min-h-screen">
+      <h1 className="sr-only">IESIA 2026 International Conference at IEM Kolkata</h1>
       <Navbar />
       {/* SECTION 1: HERO */}
       <Hero />
@@ -29,6 +31,7 @@ function App() {
         <Sponsors />
         <Gallery />
         <Venue />
+        <Poster/>
         <Footer />
       </div>
     </div>

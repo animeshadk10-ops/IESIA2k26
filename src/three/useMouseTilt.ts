@@ -1,4 +1,4 @@
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useEffect } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 
@@ -13,10 +13,12 @@ export function useMouseTilt(maxDegrees = 5) {
   }, []);
 
   // Attach listener
-  if (typeof window !== 'undefined') {
-    window.addEventListener('mousemove', onMouseMove);
-  }
-
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('mousemove', onMouseMove);
+      return () => window.removeEventListener('mousemove', onMouseMove);
+    }
+  }, [onMouseMove]);
   useFrame(() => {
     if (!groupRef.current) return;
     const maxRad = THREE.MathUtils.degToRad(maxDegrees);
