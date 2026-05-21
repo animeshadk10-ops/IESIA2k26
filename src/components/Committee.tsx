@@ -65,7 +65,7 @@ const programCommitteeData = [
   {
     id: 9,
     name: "Prof. Neeta Sahay",
-    role: "Convenor",
+    role: "Co-Convenor",
     desc: "Assistant Professor, IEM Kolkata.",
     image: "/program committe/neetamam.png"
   }
