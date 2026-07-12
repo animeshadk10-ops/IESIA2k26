@@ -104,7 +104,7 @@ function UploadProtocol() {
           </h3>
           <p className="text-[#1B7B79] text-base md:text-lg font-medium leading-relaxed mb-6">
             Submit full paper(s) electronically through {' '}
-            <a href="https://cmt3.research.microsoft.com/" target="_blank" rel="noopener noreferrer"
+            <a href="https://cmt3.research.microsoft.com/IESIA2026/Submission/Index" target="_blank" rel="noopener noreferrer"
               className="text-[#D97757] font-black hover:text-[#1B7B79] transition-colors underline">
               Microsoft CMT
             </a>. All papers will be double-blind peer-reviewed.
@@ -148,7 +148,7 @@ function UploadProtocol() {
           custom={4} initial="hidden" animate={inView ? 'visible' : 'hidden'} variants={fadeUp}
           className="mt-6 flex flex-col gap-6"
         >
-          <a href="https://cmt3.research.microsoft.com/" target="_blank" rel="noopener noreferrer"
+          <a href="https://cmt3.research.microsoft.com/IESIA2026/Submission/Index" target="_blank" rel="noopener noreferrer"
             className="bg-[#1B7B79] text-white px-12 py-6 rounded-3xl text-2xl font-bold hover:bg-[#145d5c] transition-colors flex items-center justify-center gap-2">
             SUBMIT PAPER <span>→</span>
           </a>
